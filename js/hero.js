@@ -1,4 +1,4 @@
-/* ============ SELECTING HERO CAROUSEL ============ */
+/* ============ SELECTING HERO CAROUSEL (ULTRA SMOOTH & MOMENTUM) ============ */
 (function() {
   "use strict";
 
@@ -22,8 +22,8 @@
   window.initHeroCarousel = function(traineesB, traineesG) {
     if (!selectHeroTrack) return;
 
-    const shuffledB = shuffle(traineesB);
-    const shuffledG = shuffle(traineesG);
+    const shuffledB = shuffle(traineesB || []);
+    const shuffledG = shuffle(traineesG || []);
     const allMixed = [];
     const maxLen = Math.max(shuffledB.length, shuffledG.length);
     
@@ -32,7 +32,10 @@
       if (shuffledG[i]) allMixed.push(shuffledG[i]);
     }
 
+    if (allMixed.length === 0) return;
+
     selectHeroTrack.innerHTML = "";
+    // โคลน 2 ชุดเพื่อทำ Seamless Infinite Loop
     const displayList = [...allMixed, ...allMixed];
 
     displayList.forEach(t => {
@@ -42,93 +45,146 @@
         : "linear-gradient(135deg, #FFBDD9 0%, #E8438A 100%)";
 
       const avatarContent = t.image && t.image.trim() !== ""
-        ? `<img src="${t.image}" alt="${t.stageName || t.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`
-        : `<div class="avatar-fill" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:34px;color:#fff;background:${bgGrad};">${initials(t.stageName || t.name)}</div>`;
+        ? `<img src="${t.image}" alt="${t.stageName || t.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;user-select:none;">`
+        : `<div class="avatar-fill" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:34px;color:#fff;background:${bgGrad};user-select:none;">${initials(t.stageName || t.name)}</div>`;
 
       const card = document.createElement("div");
       card.className = `select-hero-card ${isB ? 'side-b' : 'side-g'}`;
       card.style.background = bgGrad;
+      card.style.userSelect = "none";
+      card.style.webkitUserSelect = "none";
       
       const displayName = t.stageName && t.stageName.trim() !== "" ? t.stageName : t.name;
 
       card.innerHTML = `
         ${avatarContent}
-        <div class="name-plate">
+        <div class="name-plate" style="pointer-events:none;">
           <div class="no">${t.id}</div>
           <div class="nm">${displayName}</div>
         </div>
       `;
       card.addEventListener("click", () => {
-        if (typeof window.openProfileModal === "function") window.openProfileModal(t);
+        if (!window.__heroHasDragged && typeof window.openProfileModal === "function") {
+          window.openProfileModal(t);
+        }
       });
       selectHeroTrack.appendChild(card);
     });
 
-    let autoScrollTimer = setInterval(() => {
-      if (!selectHeroTrack) return;
-      const cardWidth = 134; 
-      const halfWidth = allMixed.length * cardWidth;
-
-      if (selectHeroTrack.scrollLeft >= halfWidth) {
-        selectHeroTrack.scrollTo({ left: 0, behavior: 'instant' });
-        selectHeroTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
-      } else {
-        selectHeroTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
-      }
-    }, 3000);
-
-    if (autoScrollWrap) {
-      autoScrollWrap.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
-      autoScrollWrap.addEventListener("mouseleave", () => {
-        autoScrollTimer = setInterval(() => {
-          if (!selectHeroTrack) return;
-          const cardWidth = 134;
-          const halfWidth = allMixed.length * cardWidth;
-
-          if (selectHeroTrack.scrollLeft >= halfWidth) {
-            selectHeroTrack.scrollTo({ left: 0, behavior: 'instant' });
-            selectHeroTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
-          } else {
-            selectHeroTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
-          }
-        }, 3000);
-      });
-    }
-  };
-
-  if (selectHeroTrack) {
+    // -------------------------------------------------------------
+    // ระบบ Physics Momentum & Continuous Smooth Auto-Glide (60-240Hz)
+    // -------------------------------------------------------------
     let isDown = false;
-    let dragMoved = false;
+    let isHovered = false;
+    window.__heroHasDragged = false;
     let startX = 0;
-    let startScrollLeft = 0;
+    let lastX = 0;
+    let lastPointerTime = performance.now();
+    let dragVelocity = 0;
+    const baseSpeed = 45; // ความเร็วเดินหน้าอัตโนมัติ (px/วินาที)
+    let currentVelocity = baseSpeed;
+    let lastFrameTime = performance.now();
+    let animId = null;
 
-    selectHeroTrack.addEventListener("mousedown", (e) => {
+    function getHalfWidth() {
+      return (selectHeroTrack.scrollWidth / 2) || 1;
+    }
+
+    const wrapEl = autoScrollWrap || selectHeroTrack;
+
+    wrapEl.addEventListener("mouseenter", () => { isHovered = true; });
+    wrapEl.addEventListener("mouseleave", () => {
+      isHovered = false;
+      lastFrameTime = performance.now();
+    });
+
+    function onPointerDown(clientX) {
       isDown = true;
-      dragMoved = false;
-      e.preventDefault(); 
+      window.__heroHasDragged = false;
+      startX = clientX;
+      lastX = clientX;
+      lastPointerTime = performance.now();
+      dragVelocity = 0;
       selectHeroTrack.classList.add("dragging");
-      startX = e.pageX - selectHeroTrack.offsetLeft;
-      startScrollLeft = selectHeroTrack.scrollLeft;
-    });
+    }
 
-    window.addEventListener("mousemove", (e) => {
+    function onPointerMove(clientX) {
       if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - selectHeroTrack.offsetLeft;
-      const walk = x - startX;
-      if (Math.abs(walk) > 4) dragMoved = true;
-      selectHeroTrack.scrollLeft = startScrollLeft - walk;
-    });
+      const now = performance.now();
+      const dt = (now - lastPointerTime) / 1000;
+      const dx = clientX - lastX;
 
-    function endDrag() {
+      if (Math.abs(clientX - startX) > 6) {
+        window.__heroHasDragged = true;
+      }
+
+      selectHeroTrack.scrollLeft -= dx;
+      const halfWidth = getHalfWidth();
+      if (selectHeroTrack.scrollLeft >= halfWidth) {
+        selectHeroTrack.scrollLeft -= halfWidth;
+      } else if (selectHeroTrack.scrollLeft <= 0) {
+        selectHeroTrack.scrollLeft += halfWidth;
+      }
+
+      if (dt > 0.005) {
+        const instantVelocity = -dx / dt;
+        dragVelocity = dragVelocity * 0.3 + instantVelocity * 0.7;
+        lastPointerTime = now;
+        lastX = clientX;
+      }
+    }
+
+    function onPointerUp() {
       if (!isDown) return;
       isDown = false;
       selectHeroTrack.classList.remove("dragging");
+
+      // ส่งแรงเฉื่อยตอนปล่อยมือ ป้องกันการหยุดกึก (Momentum Lerp)
+      const maxFling = 900;
+      currentVelocity = Math.max(-maxFling, Math.min(maxFling, dragVelocity));
+      lastFrameTime = performance.now();
+      setTimeout(() => { window.__heroHasDragged = false; }, 80);
     }
-    window.addEventListener("mouseup", endDrag);
-    selectHeroTrack.addEventListener("mouseleave", () => { if (isDown) endDrag(); });
-  }
 
+    // Mouse Listeners
+    selectHeroTrack.addEventListener("mousedown", (e) => onPointerDown(e.pageX));
+    window.addEventListener("mousemove", (e) => onPointerMove(e.pageX));
+    window.addEventListener("mouseup", onPointerUp);
 
-  
+    // Touch Listeners (มือถือ / แท็บเล็ต)
+    selectHeroTrack.addEventListener("touchstart", (e) => {
+      if (e.touches && e.touches[0]) onPointerDown(e.touches[0].pageX);
+    }, { passive: true });
+    window.addEventListener("touchmove", (e) => {
+      if (e.touches && e.touches[0]) onPointerMove(e.touches[0].pageX);
+    }, { passive: true });
+    window.addEventListener("touchend", onPointerUp);
+    window.addEventListener("touchcancel", onPointerUp);
+
+    // Physics Loop ต่อเนื่อง ไม่มี Jump / ไม่มีกึก
+    function physicsTick(now) {
+      const dt = Math.min((now - lastFrameTime) / 1000, 0.1);
+      lastFrameTime = now;
+
+      if (!isDown) {
+        const target = isHovered ? 0 : baseSpeed;
+        // Smooth Lerp ค่อยๆ ดึงความเร็วกลับสู่ปกติแบบเนียนกริบ
+        currentVelocity = currentVelocity * 0.94 + target * 0.06;
+
+        selectHeroTrack.scrollLeft += currentVelocity * dt;
+        const halfWidth = getHalfWidth();
+        if (selectHeroTrack.scrollLeft >= halfWidth) {
+          selectHeroTrack.scrollLeft -= halfWidth;
+        } else if (selectHeroTrack.scrollLeft <= 0) {
+          selectHeroTrack.scrollLeft += halfWidth;
+        }
+      }
+
+      animId = requestAnimationFrame(physicsTick);
+    }
+
+    if (animId) cancelAnimationFrame(animId);
+    lastFrameTime = performance.now();
+    animId = requestAnimationFrame(physicsTick);
+  };
 })();

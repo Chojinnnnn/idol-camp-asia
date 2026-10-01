@@ -105,7 +105,7 @@
         <div class="hero-content" style="flex: 1 1 340px; min-width: 300px; z-index: 1;">
           <p class="eyebrow" style="color: #E8438A; font-weight: 800; font-size: 13px; letter-spacing: 0.8px; margin-bottom: 6px;">RECENT — EP. 02</p>
           <h1 class="hero-title" style="font-size: 45px; margin-bottom: 10px; font-weight: 900; line-height: 1.2; background: linear-gradient(120deg, #0E6FA8 20%, #E8438A 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">【SECOND STAGE】<br>POSITION EVALUATION</h1>
-          <p class="hero-desc" style="margin-bottom: 18px; color: #526B7D; font-size: 15px; line-height: 1.6;">เด็กฝึกทั้ง 80 คน จะถูกแบ่งกลุ่มออกเป็นทั้งหมด 20 ทีม ฝั่งละ 10 ทีม (แยกชาย-หญิง) เพื่อประชันความสามารถในโจทย์เพลงต่าง ๆ</p>
+          <p class="hero-desc" style="margin-bottom: 18px; color: #526B7D; font-size: 15px; line-height: 1.6;">เด็กฝึกทั้งหมดจะต้องเลือกประชันกันในเพลงที่ท้าทายความสามารถทั้งในด้าน Vocal, Rap และ Dance โดยเด็กฝึกจะถูกแบ่งออกเป็นทั้งหมด 24 ทีม (แยกชาย-หญิง) โดยจำนวนเด็กฝึกในแต่ละทีมจะมีจำนวนที่ไม่เท่ากัน</p>
           <div class="hero-actions" style="margin-top: 0;">
             <button type="button" class="btn btn-primary lg" onclick="if(typeof window.switchBattleStage==='function'){window.switchBattleStage('stage-second');}else if(typeof window.activateTab==='function'){window.activateTab('battle');}" style="padding: 10px 24px; font-size: 14.5px; box-shadow: 0 8px 20px -6px rgba(232, 67, 138, 0.45);">ดูรายละเอียด →</button>
           </div>
@@ -570,7 +570,46 @@
 <script src="js/cast.js"></script>
 <script src="js/calendar.js"></script>
 
-<!-- Scripts (Loop PLaylist) -->
+<!-- ระบบจำแท็บล่าสุดเมื่อรีเฟรชหน้าเว็บ (Remember Active Tab) -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const savedTab = localStorage.getItem("idol_camp_active_tab");
+  const savedStage = localStorage.getItem("idol_camp_active_stage");
+
+  // 1. ตรวจจับการกดเปลี่ยนแท็บหลัก แล้วบันทึกลง LocalStorage
+  document.querySelectorAll(".tab-btn[data-tab]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tabId = btn.dataset.tab;
+      if (tabId) localStorage.setItem("idol_camp_active_tab", tabId);
+    });
+  });
+
+  // 2. ตรวจจับการกดเปลี่ยน Stage ของหน้า Battle
+  document.querySelectorAll(".tab-sub-item[data-stage]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const stageId = btn.dataset.stage;
+      if (stageId) localStorage.setItem("idol_camp_active_stage", stageId);
+    });
+  });
+
+  // 3. เมื่อรีเฟรชหน้าเว็บ ถ้ามีแท็บที่เคยเปิดค้างไว้ ให้เปิดแท็บนั้นทันที
+  if (savedTab && savedTab !== "home") {
+    if (typeof window.activateTab === "function") {
+      window.activateTab(savedTab);
+    } else {
+      const targetBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+      if (targetBtn) targetBtn.click();
+    }
+  }
+
+  // 4. ถ้าแท็บล่าสุดเป็น Battle และมี Stage ที่เคยเปิดไว้ ให้สลับไปที่ Stage นั้น
+  if (savedTab === "battle" && savedStage && typeof window.switchBattleStage === "function") {
+    window.switchBattleStage(savedStage);
+  }
+});
+</script>
+
+<!-- Scripts (Loop PLaylist - แก้จอ Refresh Rate สูง + ปล่อยเมาส์สมูท) -->
 <script>
 (function() {
   const PLAYLIST_R1_CSV = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSgJm-hdAxCRJmSqni3wlRQmZl4f74DiNMqr6c_O3a5mR913CYCpaiF_NQbWKOpAx6nNjxhC7EoIbwz/pub?gid=965630160&single=true&output=csv&t=${Date.now()}`;
@@ -586,7 +625,10 @@
   let hasDragged = false;
   let startX = 0;
   let startPosX = 0;
-  const speed = 0.6; // ความเร็วการวิ่งลูปช้าๆ
+  let lastTime = performance.now();
+  
+  // กำหนดความเร็วคงที่ 35 พิกเซลต่อวินาที (เท่ากันทุกจอ ไม่ว่า 60Hz หรือ 144Hz)
+  const PIXELS_PER_SEC = 35;
 
   function createCard(item) {
     const side = (item.side || "b").toLowerCase().trim();
@@ -623,7 +665,6 @@
       a.style.boxShadow = "0 8px 24px -8px rgba(23, 52, 71, 0.25)";
     };
 
-    // ป้องกันการเผลอเปิดลิงก์ตอนกำลังลากนิ้วเลื่อน
     a.addEventListener("click", (e) => {
       if (hasDragged) {
         e.preventDefault();
@@ -649,10 +690,7 @@
 
   function startSmoothLoop(validList) {
     track.innerHTML = "";
-    
-    // เรียงตามแถวใน Google Sheets 1:1
     validList.forEach(item => track.appendChild(createCard(item)));
-    // โคลนอีก 1 ชุดเพื่อทำ Seamless Infinite Loop
     validList.forEach(item => track.appendChild(createCard(item)));
 
     function getHalfWidth() {
@@ -661,10 +699,12 @@
 
     wrap.addEventListener("mouseenter", () => { isHovered = true; });
     wrap.addEventListener("mouseleave", () => { 
-      if (!isDragging) isHovered = false; 
+      if (!isDragging) {
+        isHovered = false;
+        lastTime = performance.now(); // รีเซ็ตเวลาเพื่อไม่ให้กระตุก
+      }
     });
 
-    // Event รองรับทั้งเมาส์บนคอมพิวเตอร์และทัชสกรีนบนมือถือ
     function onPointerDown(e) {
       isDragging = true;
       hasDragged = false;
@@ -694,6 +734,7 @@
       if (!isDragging) return;
       isDragging = false;
       wrap.style.cursor = "grab";
+      lastTime = performance.now(); // ป้องกันอาการกึกตอนปล่อยเมาส์
       setTimeout(() => { hasDragged = false; }, 80);
     }
 
@@ -706,9 +747,13 @@
     window.addEventListener("touchend", onPointerUp);
     window.addEventListener("touchcancel", onPointerUp);
 
-    function tick() {
+    // ลูปความเร็วตามเวลาจริง (Delta-Time Animation)
+    function tick(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.1); // ป้องกัน Frame drop กระตุก
+      lastTime = now;
+
       if (!isHovered && !isDragging) {
-        posX += speed;
+        posX += PIXELS_PER_SEC * dt;
         const halfWidth = getHalfWidth();
         if (posX >= halfWidth) {
           posX = 0;
@@ -719,7 +764,8 @@
     }
 
     if (animId) cancelAnimationFrame(animId);
-    tick();
+    lastTime = performance.now();
+    animId = requestAnimationFrame(tick);
   }
 
   if (typeof Papa !== "undefined") {

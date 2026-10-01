@@ -1,0 +1,1684 @@
+/* ============ TOKENS ============ */
+:root{
+  --grad-a:#67E0FF;
+  --grad-b:#FFBDD9;
+  --blue:#1C93D6;
+  --blue-deep:#0E6FA8;
+  --pink:#FF5FA0;
+  --pink-deep:#E8438A;
+  --bg:#fcfcfc;
+  --surface:#ffffff;
+  --surface-2:#EAF6FB;
+  --border:#DCEEF5;
+  --text:#1C93D6;
+  --text-strong:#173447;
+  --text-soft:#5F8CA3;
+  --white:#FFFFFF;
+  --shadow: 0 12px 28px -14px rgba(28,147,214,.28);
+  --radius:16px;
+  --font-display:'Kanit', 'Noto Sans Thai', sans-serif;
+  --font-body:'Noto Sans Thai', 'Kanit', sans-serif;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  transition:background .35s ease, color .35s ease;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  color:var(--text-strong);
+  margin:0;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+img{max-width:100%;display:block;}
+ul{list-style:none;margin:0;padding:0;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+/* ============ TOPBAR ============ */
+.site-header{
+  /* ดึงรูปจากโฟลเดอร์ assets มาใช้โดยตรง */
+  background-image: url('assets/Header.jpg');
+  
+  /* ตั้งค่าให้รูปแสดงผลเต็มพื้นที่และอยู่กึ่งกลางสวยงาม */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+/* เพิ่มระยะห่างรอบๆ แผงไอคอนโซเชียล */
+.contact-row{
+  max-width:1180px;
+  margin:0 auto;
+  padding:15px 25px 0;
+}
+/* เพิ่มระยะห่างระหว่างตัวไอคอนแต่ละอันให้กว้างขึ้นอีกนิด */
+.social-cluster{
+  display:flex;
+  gap:20px;
+}
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.social-icon:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.logo-row{
+  display:flex;
+  justify-content:center;
+  padding:4px 20px 18px;
+}
+.logo-wrap{
+  cursor:pointer;
+  user-select:none;
+}
+.logo-img {
+  width: 454.8px;
+  height: 255.83px;
+  max-width: 70vw;
+  object-fit: contain;
+  margin: 0 auto;
+  
+  /* เพิ่มเอฟเฟกต์ Outer Glow ตรงนี้ครับ */
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* เอฟเฟกต์เวลาเอาเมาส์ไปชี้ที่โลโก้ */
+.logo-img:hover {
+  filter: drop-shadow(0px 0px 18px rgb(255, 255, 255));
+  transform: scale(1.02);
+}
+
+/* ============ TAB NAV ============ */
+.tabnav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 100;
+  overflow: visible !important;
+}
+
+.tabnav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  position: relative;
+  overflow: visible !important;
+}
+
+/* ล้างสไตล์กรอบปุ่มแข็งๆ ของบราวเซอร์ */
+.tab-btn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 16px 18px 13px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 1.2px;
+  color: var(--text-soft);
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--pink);
+}
+
+.tab-btn.active {
+  color: var(--blue-deep) !important;
+  border-image: linear-gradient(90deg, var(--grad-a), var(--grad-b)) 1 !important;
+  border-bottom-width: 3px !important;
+  border-bottom-style: solid !important;
+}
+
+/* ลูกศรข้างคำว่า BATTLE */
+.arrow-icon {
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+
+.tab-dropdown.show .arrow-icon,
+.tab-dropdown:hover .arrow-icon {
+  transform: rotate(180deg);
+}
+
+/* คอนเทนเนอร์ Dropdown */
+.tab-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* กล่องเมนู Dropdown สีขาวลอยลงมา */
+.tab-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(23, 52, 71, 0.18);
+  min-width: 230px;
+  padding: 8px;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* แสดงเมื่อคลิกเปิด (.show) หรือนำเมาส์ไปชี้ (:hover) */
+.tab-dropdown.show .tab-dropdown-menu,
+.tab-dropdown:hover .tab-dropdown-menu {
+  display: flex !important;
+}
+
+/* ปุ่มแต่ละ Stage ในกล่อง Dropdown */
+.tab-sub-item {
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-strong);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.tab-sub-item:hover {
+  background: var(--surface-2);
+  color: var(--pink-deep);
+}
+
+.tab-sub-item.active {
+  background: linear-gradient(95deg, rgba(103, 224, 255, 0.2), rgba(255, 189, 217, 0.2));
+  color: var(--blue-deep);
+}
+
+/* ============ LAYOUT ============ */
+.tab-panel{display:none;}
+.tab-panel.active{display:block; animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+.section{
+  max-width:1180px;
+  margin:0 auto;
+  padding:56px 20px;
+}
+.eyebrow{
+  font-family:var(--font-display);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:var(--pink);
+  margin:0 0 8px;
+}
+.section-title{
+  font-size:clamp(24px,4vw,34px);
+  font-weight:800;
+  margin-bottom:14px;
+  letter-spacing:.5px;
+}
+.section-desc{
+  color:var(--text-soft);
+  font-size:15px;
+  max-width:720px;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+}
+.hero-stripe{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 42%, var(--grad-a) 42%, var(--grad-a) 44%, var(--grad-b) 44%, var(--grad-b) 46%, transparent 46%);
+  opacity:.5;
+}
+.hero-content{
+  position:relative;
+  max-width:1180px;
+  margin:0 auto;
+  padding:80px 24px 70px;
+}
+.hero-title{
+  font-size:clamp(32px,6vw,58px);
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:1px;
+  margin:10px 0 20px;
+  background:linear-gradient(95deg, var(--blue-deep), var(--pink-deep));
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-desc{
+  max-width:620px;
+  color:var(--text-soft);
+  font-size:15.5px;
+  line-height:1.85;
+  margin-bottom:30px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ============ SELECTING HERO (SWIPE & CONNECTED) ============ */
+.select-hero-section{padding-top:44px;padding-bottom:44px;}
+.select-hero-wrap{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+.select-hero-track{
+  display:flex;
+  gap: 0px !important; /* บังคับให้ไม่มีช่องว่างระหว่างการ์ด ชิดติดกันสนิท */
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:0;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.select-hero-track::-webkit-scrollbar{display:none;}
+
+.select-hero-card{
+  flex:0 0 auto;
+  width: 134px;      /* ขนาดความกว้างตามที่คุณต้องการ */
+  height: 358px;     /* ขนาดความสูงตามที่คุณต้องการ */
+  scroll-snap-align:start;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  background:var(--surface);
+  border: none !important; /* เอาขอบออกเพื่อให้ภาพต่อกันสนิท */
+  border-radius: 0 !important; /* เอาโค้งมนออกเพื่อให้ต่อกันเหมือนในรูปตัวอย่าง */
+  margin: 0 !important;
+}
+
+.select-hero-card:hover{
+  z-index: 2;
+  filter: brightness(1.05); /* ให้สว่างขึ้นนิดหน่อยเวลาเอาเมาส์ชี้ */
+}
+
+.select-hero-card .avatar-fill{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:34px;
+  color:#fff;
+}
+
+.select-hero-card .side-badge{
+  position:absolute;top:6px;left:6px;
+  font-family:var(--font-display);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.5px;
+  color:#fff;
+  padding:2px 5px;
+  border-radius:4px;
+  background:rgba(0,0,0,0.5);
+  z-index:2;
+}
+
+/* ป้ายชื่อด้านล่างการ์ดให้ดีไซน์คล้ายในเรฟ */
+.select-hero-card .name-plate{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:20px 8px 10px;
+  background:linear-gradient(to top, rgba(77, 77, 77, 0.95), rgba(14,111,168,0));
+  z-index:2;
+  text-align: center;
+}
+.select-hero-card .name-plate .nm{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:12px;
+  color:#fff;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.select-hero-card .name-plate .no{
+  font-size:9.5px;
+  color:rgba(255,255,255,0.8);
+}
+
+
+
+/* ============ BUTTONS ============ */
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:13px 26px;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.5px;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-primary{
+  background:linear-gradient(95deg, var(--grad-a), var(--grad-b));
+  color:#123246;
+  box-shadow:var(--shadow);
+}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(255,95,160,.4);}
+.btn-ghost{
+  background:transparent;
+  color:var(--blue-deep);
+  border:1.5px solid var(--border);
+}
+.btn-ghost:hover{color:var(--pink);border-color:var(--pink);}
+.btn.lg{padding:15px 32px;font-size:15px;}
+.back-link{
+  background:none;border:none;
+  color:var(--text-soft);
+  font-size:13px;
+  margin-bottom:18px;
+  padding:0;
+}
+.back-link:hover{color:var(--pink);}
+
+/* ============ PICK'EM BAND ============ */
+.pickem-band{
+  padding:0;
+  max-width:none;
+  background:linear-gradient(100deg, var(--grad-a), var(--grad-b));
+}
+.pickem-inner{
+  max-width:1180px;
+  margin:0 auto;
+  padding:46px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+}
+.pickem-text .eyebrow{color:rgba(23,52,71,.65);}
+.pickem-text h2{font-size:28px;font-weight:900;color:#123246;margin:2px 0 6px;}
+.pickem-text p{color:#1c4257;font-size:14.5px;margin:0;}
+.pickem-band .btn-primary{background:#123246;color:#fff;box-shadow:0 12px 26px -12px rgba(18,50,70,.5);}
+.pickem-band .btn-primary:hover{background:var(--pink-deep);}
+
+/* ============ CARD GRID / NEWS ============ */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:18px;
+}
+.news-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.news-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.news-card .tag{
+  display:inline-block;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:1px;
+  color:var(--pink-deep);
+  background:var(--surface-2);
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:12px;
+}
+.news-card h4{font-size:15.5px;margin-bottom:8px;line-height:1.5;}
+.news-card p{color:var(--text-soft);font-size:13px;line-height:1.7;margin:0;}
+
+/* ============ MEDIA CARD (TITLE SONG) ============ */
+.media-card{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:36px;
+  align-items:center;
+}
+.media-frame{
+  aspect-ratio:16/9;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:linear-gradient(135deg, var(--grad-a), var(--grad-b));
+  box-shadow:var(--shadow);
+}
+.media-placeholder{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:800;
+  letter-spacing:3px;
+  color:rgba(18,50,70,.55);
+  font-size:14px;
+}
+.media-info h3{font-size:22px;margin-bottom:12px;}
+.tbd{color:var(--pink);font-weight:600;}
+.media-info p{color:var(--text-soft);line-height:1.8;font-size:14.5px;margin-bottom:20px;}
+.meta-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:11px 0;
+  border-bottom:1px dashed var(--border);
+  font-size:13.5px;
+}
+.meta-list li span{color:var(--text-soft);}
+.meta-list li b{color:var(--text-strong);}
+
+@media (max-width:760px){
+  .media-card{grid-template-columns:1fr;}
+}
+
+/* ============ TEAM BATTLE ============ */
+.teamside-toggle{
+  display:inline-flex;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:4px;
+  margin-bottom:28px;
+}
+.side-btn{
+  border:none;background:none;
+  padding:10px 20px;
+  border-radius:999px;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:12.5px;
+  letter-spacing:.5px;
+  color:var(--text-soft);
+}
+.side-btn.active{
+  background:linear-gradient(95deg, var(--grad-a), var(--grad-b));
+  color:#123246;
+}
+.team-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px;
+}
+.team-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+}
+.team-card-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;
+}
+.team-card-head h4{font-size:15px;}
+.team-num{
+  font-family:var(--font-display);
+  font-size:11px;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(95deg, var(--blue-deep), var(--pink-deep));
+  padding:3px 10px;
+  border-radius:999px;
+}
+.team-members{display:flex;flex-wrap:wrap;gap:7px;}
+.team-member-chip{
+  font-size:12px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:var(--surface-2);
+  color:var(--text-strong);
+}
+
+/* ============ TRAINEES ============ */
+.trainee-block{margin-bottom:46px;}
+.trainee-block-head{
+  display:flex;align-items:baseline;gap:12px;
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+.trainee-block-head h3{
+  font-size:20px;
+  letter-spacing:1px;
+}
+.count-pill{
+  font-size:12px;
+  color:var(--text-soft);
+  font-family:var(--font-display);
+}
+.trainee-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:14px;
+}
+.trainee-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  text-align:center;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.trainee-card:hover{
+  transform:translateY(-5px);
+  box-shadow:var(--shadow);
+  border-color:var(--pink);
+}
+
+.trainee-card.eliminated {
+  filter: grayscale(100%);
+  opacity: 0.55;
+  background: #000000;
+  border-color: #dcdcdc;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.trainee-card.eliminated:hover {
+  opacity: 0.85;
+  filter: grayscale(60%);
+  border-color: #bbb;
+}
+
+.trainee-avatar{
+  aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:22px;
+  color:#fff;
+}
+.trainee-num{
+  position:absolute;
+}
+.trainee-card-body{padding:10px 8px 14px;}
+.trainee-name{font-size:13px;font-weight:600;color:var(--text-strong);margin-bottom:2px;}
+.trainee-no{font-size:11px;color:var(--text-soft);font-family:var(--font-display);}
+
+/* ============ PICK'EM GRID ============ */
+.pickem-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:14px;
+}
+.pickem-card{
+  position:relative;
+  cursor:pointer;
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  text-align:center;
+  transition:transform .2s ease, border-color .2s ease;
+}
+.pickem-card:hover{transform:translateY(-4px);}
+.pickem-card.voted{border-color:var(--pink);}
+.pickem-card.voted::after{
+  content:"♥";
+  position:absolute;top:8px;right:8px;
+  color:var(--pink-deep);
+  font-size:16px;
+}
+.pickem-card .trainee-avatar{aspect-ratio:1/1;font-size:20px;}
+.pickem-card-body{padding:9px 6px 12px;}
+.vote-count{font-size:11px;color:var(--text-soft);}
+
+/* ============ CAST SECTION (SOFT & MODERN) ============ */
+#panel-cast{
+  background:linear-gradient(180deg,#F2FAFE 0%,#FDF6FA 100%);
+}
+#panel-cast .section{padding-bottom:72px;}
+#panel-cast .eyebrow{text-align:center;color:#C92F73;}
+#panel-cast .section-title{text-align:center;}
+#panel-cast .section-desc{
+  text-align:center;
+  margin-left:auto;margin-right:auto;
+  margin-bottom:44px;
+  font-size:16px;
+  color:#4B6B7F;
+}
+
+/* ชื่อกลุ่ม (MC / LEAD MENTOR / MENTORS) */
+.cast-section-group{
+  margin-bottom:56px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.cast-section-group:last-child{margin-bottom:0;}
+.cast-section-title{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  max-width:520px;
+  margin-bottom:26px;
+  justify-content:center;
+  font-family:var(--font-display);
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:#C92F73;
+  white-space:nowrap;
+}
+.cast-section-title::before,
+.cast-section-title::after{
+  content:"";
+  flex:1;
+  height:1.5px;
+  border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,95,160,.35));
+}
+.cast-section-title::after{transform:scaleX(-1);}
+
+/* การ์ด */
+.cast-card{
+  --cast-muted:#4B6B7F;
+  display:flex;
+  flex-direction:column;
+  padding:10px;
+  background:var(--surface);
+  border:1px solid rgba(220,238,245,.9);
+  border-radius:26px;
+  box-shadow:0 1px 2px rgba(23,52,71,.04), 0 18px 36px -20px rgba(28,147,214,.35);
+  text-align:center;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.cast-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 2px 4px rgba(23,52,71,.05), 0 26px 44px -20px rgba(232,67,138,.30);
+}
+.cast-card:focus-visible{outline:3px solid var(--grad-a);outline-offset:3px;}
+
+.cast-avatar{
+  position:relative;
+  overflow:hidden;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--grad-a),var(--grad-b));
+  font-family:var(--font-display);
+  font-weight:800;
+  color:#fff;
+}
+.cast-card-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+/* ส่วนข้อความใต้รูป (รองรับทั้งมี wrapper และไม่มี) */
+.cast-card > :not(.cast-avatar){padding-left:12px;padding-right:12px;}
+.cast-card > .cast-avatar + *{padding-top:18px;}
+.cast-card > :last-child:not(.cast-avatar){padding-bottom:14px;}
+
+.cast-role{
+  display:inline-block;
+  margin-bottom:10px;
+  padding:4px 14px;
+  border-radius:999px;
+  background:#FFE9F2;
+  color:#B22A64;
+  font-family:var(--font-display);
+  font-size:12.5px;
+  font-weight:600;
+  line-height:1.5;
+}
+.cast-name{
+  margin:0 0 6px;
+  font-family:var(--font-display);
+  font-weight:700;
+  line-height:1.35;
+  color:var(--text-strong);
+}
+.cast-cv{
+  margin-bottom:10px;
+  font-size:13.5px;
+  line-height:1.6;
+  color:var(--cast-muted,#4B6B7F);
+}
+.cast-quote {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--text-strong);
+  line-height: 1.5;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.cast-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* ย่อข้อความยาว แล้วขยายเต็มเมื่อเอาเมาส์ชี้ (หรือแตะ/โฟกัสบนมือถือ) */
+.cast-cv,
+.cast-quote{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.cast-cv{-webkit-line-clamp:1;line-clamp:1;}
+.cast-quote{-webkit-line-clamp:2;line-clamp:2;}
+.cast-card:hover .cast-cv,
+.cast-card:hover .cast-quote,
+.cast-card:focus-within .cast-cv,
+.cast-card:focus-within .cast-quote{
+  display:block;
+  -webkit-line-clamp:unset;
+  line-clamp:unset;
+  overflow:visible;
+}
+.cast-card:hover,
+.cast-card:focus-within{position:relative;z-index:2;}
+/* ให้การ์ดข้างเคียงไม่ถูกดึงสูงตามเวลาขยาย */
+.cast-grid-large,
+.cast-grid-medium{align-items:flex-start;}
+.cast-grid-small{align-items:start;}
+
+/* 1. MC — ใหญ่สุด */
+.cast-grid-large{
+  display:flex;
+  justify-content:center;
+  gap:28px;
+  flex-wrap:wrap;
+  width:100%;
+}
+.cast-grid-large .cast-card{max-width:520px;width:100%;}
+.cast-grid-large .cast-avatar{aspect-ratio:16/9;font-size:36px;}
+.cast-grid-large .cast-name{font-size:22px;}
+
+/* 2. LEAD MENTOR — กลาง */
+.cast-grid-medium{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  flex-wrap:wrap;
+  width:100%;
+}
+.cast-grid-medium .cast-card{max-width:380px;width:100%;}
+.cast-grid-medium .cast-avatar{aspect-ratio:4/3;font-size:28px;}
+.cast-grid-medium .cast-name{font-size:18px;}
+
+/* 3. MENTORS — เล็ก */
+.cast-grid-small{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:20px;
+  width:100%;
+}
+.cast-grid-small .cast-avatar{aspect-ratio:1/1;font-size:22px;}
+.cast-grid-small .cast-name{font-size:16px;}
+
+@media (max-width:600px){
+  #panel-cast .section-desc{font-size:15px;margin-bottom:32px;}
+  .cast-section-group{margin-bottom:44px;}
+  .cast-grid-large .cast-avatar{aspect-ratio:4/3;}
+  .cast-grid-small{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .cast-grid-small .cast-card{padding:8px;border-radius:22px;}
+  .cast-grid-small .cast-avatar{border-radius:15px;}
+  .cast-grid-small .cast-name{font-size:15px;}
+  .cast-grid-small .cast-quote{font-size:13px;padding:10px 12px;}
+}
+
+/* ============ CALENDAR ============ */
+.calendar-head{
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  margin-bottom:22px;
+}
+.calendar-head h3{font-size:19px;min-width:180px;text-align:center;}
+.cal-nav{
+  width:38px;height:38px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--blue-deep);
+  font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease, color .2s ease;
+}
+.cal-nav:hover{background:linear-gradient(95deg,var(--grad-a),var(--grad-b));color:#123246;}
+.calendar-weekdays{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  text-align:center;
+  font-size:11.5px;
+  font-weight:700;
+  color:var(--text-soft);
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+.calendar-weekdays div{padding:8px 0;}
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+.cal-cell{
+  min-height:88px;
+  border-radius:10px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:8px;
+  font-size:12px;
+  position: relative;
+  overflow: hidden;
+}
+.cal-cell.empty{background:transparent;border-color:transparent;}
+.cal-daynum{font-family:var(--font-display);font-weight:700;color:var(--text-strong);font-size:12.5px;}
+.cal-cell.today{border-color:var(--pink);}
+.cal-cell.today .cal-daynum{color:var(--pink-deep);}
+
+/* ============ CALENDAR EVENT & TAG STRUCTURE ============ */
+.cal-event-wrapper {
+  margin-top: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.cal-event-wrapper:hover {
+  transform: translateY(-1px);
+}
+
+/* กลุ่ม Tag รวมในบรรทัดเดียวกัน */
+.cal-events-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-bottom: 2px;
+}
+
+/* 1. ส่วน Tag มน สีขาว */
+.cal-tag-badge {
+  background-color: #ffffff !important;
+  border-radius: 999px;
+  padding: 1px 6px;
+  font-size: 9.5px;
+  font-weight: 800;
+  line-height: 1.2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* 2. ส่วนแถบสีรายละเอียด (บรรทัดล่างต่อจากกลุ่ม Tag) */
+.cal-event-bar {
+  display: block;
+  width: 100%;
+  border-radius: 8px; /* หรือ 999px ตามความโค้งที่ชอบ */
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  
+  /* เพิ่มระยะห่างระหว่างแถบสี (ปรับตัวเลขตามต้องการ เช่น 4px - 6px) */
+  margin-top: 4px; 
+  
+  min-height: 18px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* จุดสี Legend */
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.event-legend{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:20px;font-size:12px;color:var(--text-soft);
+}
+.event-legend span{display:inline-flex;align-items:center;gap:6px;}
+.legend-dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+@media (max-width:640px){
+  .cal-cell{min-height:56px;font-size:10.5px;}
+  .calendar-head h3{min-width:120px;font-size:16px;}
+}
+
+/* ============ CALENDAR BIRTHDAY BADGE ============ */
+.cal-birthday-wrap {
+  position: absolute;
+  bottom: 4px; /* 🟢 ย้ายลงมาติดขอบล่าง */
+  right: 4px;  /* 🟢 อยู่ฝั่งขวา */
+  display: flex;
+  gap: 3px;
+  z-index: 10;
+}
+
+.cal-avatar-badge {
+  width: 32px;  /* 🟢 ขยายขนาดวงกลมให้ใหญ่ขึ้น */
+  height: 32px; /* 🟢 ขยายขนาดวงกลมให้ใหญ่ขึ้น */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ffffff; /* ปรับขอบขาวให้หนาขึ้นเข้ากับขนาดวงกลม */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  background: var(--surface-2);
+  transition: transform 0.15s ease;
+}
+
+.cal-avatar-badge:hover {
+  transform: scale(1.2); /* เพิ่มเอฟเฟกต์ซูมเวลา Hover */
+  z-index: 11;
+}
+
+.cal-avatar-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cal-avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px; /* ปรับขนาดตัวหนังสือสำหรับกรณีไม่มีรูป */
+  font-weight: bold;
+  color: #fff;
+  font-family: var(--font-display);
+}
+
+/* ============ RANKING SECTION ============ */
+.ranking-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.ranking-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.round-select {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.ranking-content-box {
+  background: #fbfdfe;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 20px 48px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.rank-banner-tag {
+  display: inline-block;
+  background: linear-gradient(95deg, var(--blue-deep), var(--blue));
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 5px 16px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+}
+.rank-banner-tag.rank-secondary {
+  background: linear-gradient(95deg, #4b7bec, #3867d6);
+}
+.rank-banner-tag.rank-muted {
+  background: #778ca3;
+}
+
+/* ส่วนตัวการ์ดเด็กฝึกแต่ละคน */
+.ranking-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.ranking-item:hover {
+  transform: translateY(-4px);
+}
+
+.rank-avatar-wrap {
+  position: relative;
+  border-radius: 50%;
+  overflow: visible;
+  margin-bottom: 10px;
+}
+
+.rank-avatar-img {
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  display: block;
+}
+
+/* ป้ายหมายเลขลำดับ (ทรงกลมมุมซ้ายบนสไตล์รายการ Survival) */
+.rank-badge-num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-15%, -15%);
+  background: #1C93D6;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+/* มงกุฎอันดับ 1 */
+.rank-crown {
+  position: absolute;
+  top: -12px;
+  right: -4px;
+  font-size: 26px;
+  transform: rotate(18deg);
+  z-index: 2;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+}
+
+.rank-meta-name {
+  font-size: 12.5px;
+  color: var(--text-soft);
+  line-height: 1.2;
+}
+.rank-meta-stage {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+}
+
+/* จัดเลย์เอาต์ปิรามิด (Top 1-5) */
+.rank-pyramid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+/* แถวกลางและแถวบน */
+.pyramid-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+}
+
+/* แถวที่ 2: อันดับ 2 และ 3 (ขยายระยะห่างขึ้นอีกนิด) */
+.pyramid-row.pyramid-row-mid {
+  gap: 100px !important;
+}
+
+/* แถวที่ 3: อันดับ 4 และ 5 (กางระยะห่างเยอะสุดเป็นฐานปิรามิด) */
+.pyramid-row.pyramid-row-bottom {
+  gap: 220px !important;
+}
+
+/* ปรับระยะห่างสำหรับหน้าจอมือถือ */
+@media (max-width: 680px) {
+  .pyramid-row.pyramid-row-mid {
+    gap: 40px !important;
+  }
+  .pyramid-row.pyramid-row-bottom {
+    gap: 75px !important;
+  }
+}
+
+/* ขนาดอันดับ 1 (ใหญ่ที่สุด) */
+.pyramid-rank-1 .rank-avatar-img {
+  width: 154px;
+  height: 154px;
+  border: 4px solid #77b7ff;
+}
+.pyramid-rank-1 .rank-badge-num {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  background: #2652a3;
+}
+.pyramid-rank-1 .rank-meta-stage {
+  font-size: 17px;
+}
+
+/* ขนาดมาตรฐาน (อันดับ 2, 3, 4, 5 และ 6-10) */
+.rank-std-size .rank-avatar-img {
+  width: 112px;
+  height: 112px;
+  border: 3px solid #fff;
+}
+
+/* อันดับ 6-10 เรียงกัน 5 คน */
+.rank-sub-block {
+  margin-top: 36px;
+  border-top: 1px dashed var(--border);
+  padding-top: 28px;
+}
+
+.rank-row-five {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* อันดับ 11 เป็นต้นไป (ขนาดเล็กลง เรียงแถวละ 5 คน) */
+.rank-grid-small {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px 14px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.rank-small-size .rank-avatar-img {
+  width: 88px;
+  height: 88px;
+  border: 2.5px solid #fff;
+}
+.rank-small-size .rank-meta-stage {
+  font-size: 13px;
+}
+.rank-small-size .rank-meta-name {
+  font-size: 11px;
+}
+.rank-small-size .rank-badge-num {
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+}
+
+/* รองรับจอมือถือ */
+@media (max-width: 680px) {
+  .rank-grid-small {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pyramid-row {
+    gap: 16px;
+  }
+}
+
+/* ============ G-TRAINEES PINK THEME ============ */
+/* ป้ายแท็กหัวข้อ (TOP 5, RANK 6-10, RANK 11-40) ฝั่งหญิง */
+.ranking-content-box.side-g-theme .rank-banner-tag {
+  background: linear-gradient(95deg, var(--pink-deep), #ff75a0);
+}
+.ranking-content-box.side-g-theme .rank-banner-tag.rank-secondary {
+  background: linear-gradient(95deg, #ff6b8b, #ff8da1);
+}
+.ranking-content-box.side-g-theme .rank-banner-tag.rank-muted {
+  background: #d6819f;
+}
+
+/* ป้ายวงกลมตัวเลขอันดับมุมซ้ายบนของเด็กฝึกฝั่งหญิง */
+.ranking-content-box.side-g-theme .rank-badge-num {
+  background: var(--pink-deep) !important;
+}
+
+/* กรอบรูปของอันดับ 1 ฝั่งหญิง */
+.ranking-content-box.side-g-theme .pyramid-rank-1 .rank-avatar-img {
+  border: 4px solid var(--pink) !important;
+}
+
+/* สีตัวหนังสือชื่อสเตจของฝั่งหญิง */
+.ranking-content-box.side-g-theme .rank-meta-stage {
+  color: #a81c5a;
+}
+
+/* ============ CENTER ADS MODAL ============ */
+.center-ads-modal {
+  background: var(--surface);
+  border-radius: 24px;
+  max-width: 520px;
+  width: 90%;
+  padding: 36px 28px 30px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  border: 2px solid var(--border);
+  animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ads-badge {
+  display: inline-block;
+  background: linear-gradient(95deg, var(--blue), var(--pink));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.ads-title {
+  font-size: clamp(20px, 4vw, 24px);
+  font-weight: 900;
+  color: var(--text-strong);
+  margin-bottom: 6px;
+}
+
+.ads-subtitle {
+  font-size: 14px;
+  color: var(--text-soft);
+  margin-bottom: 28px;
+}
+.ads-subtitle b {
+  color: var(--pink-deep);
+}
+
+/* คอนเทนเนอร์ 2 คน */
+.ads-centers-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 30px;
+}
+
+.ads-center-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+}
+
+.ads-avatar-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 12px;
+}
+
+.ads-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* สไตล์กรอบตามฝั่ง B / G เหมือนหน้า Ranking */
+.ads-center-card.side-b .ads-avatar-img {
+  border: 4px solid #67E0FF;
+}
+.ads-center-card.side-g .ads-avatar-img {
+  border: 4px solid #FFBDD9;
+}
+
+/* ป้าย Tag บอกตำแหน่ง Center */
+.ads-tag-pill {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 10px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+.ads-tag-pill.b-tag {
+  background: var(--blue-deep);
+}
+.ads-tag-pill.g-tag {
+  background: var(--pink-deep);
+}
+
+.ads-name {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 2px;
+}
+.ads-stage {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-strong);
+  line-height: 1.2;
+}
+.ads-song {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--blue-deep);
+  margin-top: 4px;
+}
+.ads-center-card.side-g .ads-song {
+  color: var(--pink-deep);
+}
+
+/* ปุ่มกดยืนยันปิด */
+.ads-confirm-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* ============ BATTLE TABS & STAGES ============ */
+.stage-nav-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 16px;
+}
+
+.stage-pill-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.stage-pill-btn:hover {
+  border-color: var(--pink);
+  color: var(--pink-deep);
+}
+
+.stage-pill-btn.active {
+  background: linear-gradient(95deg, var(--grad-a), var(--grad-b));
+  color: #123246;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(28, 147, 214, 0.2);
+}
+
+.stage-content-block {
+  display: none;
+  animation: fadeIn 0.35s ease;
+}
+
+.stage-content-block.active {
+  display: block;
+}
+
+.stage-header-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+
+.stage-header-box h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--text-strong);
+}
+
+.stage-header-box p {
+  color: var(--text-soft);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.stage-tag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+}
+
+.stage-tag.final {
+  background: #FFE9F2;
+  color: var(--pink-deep);
+}
+
+.stage-placeholder-box {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.stage-placeholder-box .placeholder-icon {
+  font-size: 36px;
+  margin-bottom: 14px;
+}
+
+.stage-placeholder-box h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text-strong);
+}
+
+.stage-placeholder-box p {
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* ============ BATTLE SUB-NAV BAR ============ */
+.battle-subnav-bar {
+  background: var(--surface-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  animation: fadeIn 0.25s ease;
+}
+
+.battle-subnav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.battle-sub-pill {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--text-soft);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.battle-sub-pill:hover {
+  border-color: var(--pink);
+  color: var(--pink-deep);
+}
+
+.battle-sub-pill.active {
+  background: linear-gradient(95deg, var(--grad-a), var(--grad-b));
+  color: #123246;
+  border-color: transparent;
+  box-shadow: 0 4px 10px rgba(28, 147, 214, 0.2);
+}
+
+/* ============ MODAL ============ */
+.modal-backdrop{
+  position:fixed;inset:0;
+  background:rgba(10,20,28,.55);
+  backdrop-filter:blur(3px);
+  display:none;
+  align-items:center;justify-content:center;
+  z-index:100;
+  padding:20px;
+}
+.modal-backdrop.open{display:flex;}
+.modal{
+  display: flex !important;
+  background:var(--bg);
+  border-radius:20px;
+  max-width:480px;
+  width:100%;
+  max-height:85vh;
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.4);
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(10px);} to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;
+  border-radius:50%;
+  border:none;
+  background:var(--surface);
+  color:var(--text-strong);
+  z-index:2;
+}
+.modal-close:hover{color:var(--pink);}
+.modal-hero{
+  aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:44px;
+  color:#fff;
+}
+.modal-content{padding:24px 26px 30px;}
+.modal-content .cast-role{margin-bottom:6px;}
+.modal-content h2{font-size:22px;margin-bottom:4px;}
+.modal-sub{color:var(--text-soft);font-size:13px;margin-bottom:18px;}
+.modal-meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 16px;
+  margin-bottom:18px;
+}
+.modal-meta div{
+  background:var(--surface);
+  border-radius:10px;
+  padding:10px 12px;
+}
+.modal-meta span{display:block;font-size:10.5px;color:var(--text-soft);margin-bottom:2px;}
+.modal-meta b{font-size:13px;color:var(--text-strong);}
+.modal-content .bio{font-size:13.5px;line-height:1.8;color:var(--text-soft);}
+.vote-btn{
+  margin-top:18px;
+  width:100%;
+  padding:13px;
+  border-radius:999px;
+  border:none;
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:14px;
+  background:linear-gradient(95deg,var(--grad-a),var(--grad-b));
+  color:#123246;
+}
+.vote-btn.voted{background:var(--surface-2);color:var(--pink-deep);}
+
+/* ============ FOOTER ============ */
+.site-footer{
+  text-align:center;
+  padding:28px;
+  color:var(--text-soft);
+  font-size:12.5px;
+  border-top:1px solid var(--border);
+  background:var(--surface);
+}
+
+@media (max-width:600px){
+  .logo-img{width:280px;height:157.6px;}
+  .social-icon{width:30px;height:30px;}
+  .social-icon svg{width:14px;height:14px;}
+}

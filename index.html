@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IDOL CAMP ASIA COMMU</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<header class="site-header">
+  <div class="contact-row">
+    <div class="social-cluster" aria-label="ช่องทางติดต่อ">
+      <!-- Facebook Page -->
+      <a class="social-icon" href="https://www.facebook.com/profile.php?id=61569152725014" target="_blank" rel="noopener" aria-label="Facebook Page" title="Facebook Page">
+        <svg viewBox="0 0 24 24"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>
+      </a>
+
+      <!-- Facebook Group (ไอคอนกลุ่มชุมชน) -->
+      <a class="social-icon" href="https://www.facebook.com/groups/980433311423037/about" target="_blank" rel="noopener" aria-label="Facebook Group" title="Facebook Group (กลุ่มเฟส)">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      </a>
+
+      <!-- YouTube -->
+      <a class="social-icon" href="https://www.youtube.com/@M1HStudio-CM" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+
+      <!-- Google Doc (ไอคอนโฟลเดอร์) -->
+      <a class="social-icon" href="https://docs.google.com/document/d/13Va9jw-2G2N6IxxzysP7GcU4aLFxgaPuR8G1SaW5_Rk/edit?tab=t.0" target="_blank" rel="noopener" aria-label="Google Doc" title="Google Doc (คอมมู)">
+        <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+      </a>
+    </div>
+  </div>
+  
+  <div class="logo-row">
+    <div class="logo-wrap" data-tab-target="home">
+      <img class="logo-img" src="assets/logo.png" alt="IDOL CAMP ASIA COMMU">
+    </div>
+  </div>
+
+  <!-- ===== TAB NAV ===== -->
+  <nav class="tabnav">
+    <div class="tabnav-inner" id="tabnav">
+      <button type="button" class="tab-btn active" data-tab="home">HOME</button>
+      <button type="button" class="tab-btn" data-tab="title-song">TITLE SONG</button>
+
+      <!-- BATTLE พร้อม Dropdown 4 Stages -->
+      <div class="tab-dropdown" id="battleDropdownWrap">
+        <button type="button" class="tab-btn" id="battleMainBtn">
+          BATTLE <span class="arrow-icon">▼</span>
+        </button>
+        <div class="tab-dropdown-menu" id="battleDropdownList">
+          <button type="button" class="tab-sub-item active" data-stage="stage-first">【FIRST STAGE】</button>
+          <button type="button" class="tab-sub-item" data-stage="stage-second">【SECOND STAGE】</button>
+          <button type="button" class="tab-sub-item" data-stage="stage-third">【THIRD STAGE】</button>
+          <button type="button" class="tab-sub-item" data-stage="stage-final">【DEBUT NIGHT STAGE】</button>
+        </div>
+      </div>
+
+      <button type="button" class="tab-btn" data-tab="trainees">TRAINEES</button>
+      <button type="button" class="tab-btn" data-tab="ranking">RANKING</button>
+      <button type="button" class="tab-btn" data-tab="cast">CAST</button>
+      <button type="button" class="tab-btn" data-tab="program">PROGRAM</button>
+    </div>
+  </nav>
+</header>
+
+<main id="app">
+
+  <!-- ===== HOME ===== -->
+  <section class="tab-panel active" id="panel-home">
+     <!-- แถบเลื่อนลูปผลงาน FIRST STAGE (เต็มจอ 100% + ปัด/ลากเมาส์เองได้ + วิ่งลูปช้าๆ) -->
+    <div style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 25px 0 15px; overflow: hidden; background: transparent;">
+      <div style="text-align: center; margin-bottom: 20px; padding: 0 20px;">
+        <p class="eyebrow" style="color: var(--pink-deep); font-weight: 800; margin-bottom: 4px;">NOW SHOWING</p>
+        <h2 style="font-size: 24px; font-weight: 900; color: var(--text-strong); margin: 0;">ผลงานการแข่งขัน【FIRST STAGE】TEAM BATTLE</h2>
+        <p style="font-size: 14px; color: var(--text-soft); margin-top: 5px;">คลิกที่รูปภาพเพื่อรับชมคลิปการแสดงบน YouTube </p>
+      </div>
+
+      <div id="playlistLoopWrap" style="overflow: hidden; width: 100%; position: relative; cursor: grab; user-select: none; -webkit-user-select: none; mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);">
+        <div id="playlistLoopTrack" style="display: flex; gap: 16px; width: max-content; will-change: transform;">
+          <!-- รูปภาพทั้งหมดจะโหลดเข้ามาวิ่งวนลูปที่นี่ -->
+        </div>
+      </div>
+    </div>
+
+    <!-- แถบเลื่อน Hero -->
+    <div class="section select-hero-section" style="padding: 20px 0;">
+      <div class="select-hero-wrap" id="autoScrollWrap" style="overflow: hidden; width: 100%;">
+        <div class="select-hero-track" id="selectHeroTrack"></div>
+      </div>
+    </div>
+
+   <!-- RECENT EP.02 SECOND STAGE (ตัวหนังสือใหญ่ รูปใหญ่ พื้นหลัง Gradient ละมุน) -->
+    <div style="max-width: 1200px; margin: 0 auto 24px auto; padding: 0 12px;">
+      <div class="hero" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin: 0; padding: 22px 32px; border-radius: 24px; background: linear-gradient(135deg, #E8F7FD 0%, #FFFFFF 48%, #FFF0F6 100%); border: 1.5px solid rgba(255, 255, 255, 0.9); box-shadow: 0 18px 40px -15px rgba(14, 111, 168, 0.12), 0 12px 28px -10px rgba(232, 67, 138, 0.12); position: relative; overflow: hidden;">
+        
+        <!-- ฝั่งข้อความ (ตัวหนังสือใหญ่ ชัดเจน มีพลัง) -->
+        <div class="hero-content" style="flex: 1 1 340px; min-width: 300px; z-index: 1;">
+          <p class="eyebrow" style="color: #E8438A; font-weight: 800; font-size: 13px; letter-spacing: 0.8px; margin-bottom: 6px;">RECENT — EP. 02</p>
+          <h1 class="hero-title" style="font-size: 45px; margin-bottom: 10px; font-weight: 900; line-height: 1.2; background: linear-gradient(120deg, #0E6FA8 20%, #E8438A 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">【SECOND STAGE】<br>POSITION EVALUATION</h1>
+          <p class="hero-desc" style="margin-bottom: 18px; color: #526B7D; font-size: 15px; line-height: 1.6;">เด็กฝึกทั้ง 80 คน จะถูกแบ่งกลุ่มออกเป็นทั้งหมด 20 ทีม ฝั่งละ 10 ทีม (แยกชาย-หญิง) เพื่อประชันความสามารถในโจทย์เพลงต่าง ๆ</p>
+          <div class="hero-actions" style="margin-top: 0;">
+            <button type="button" class="btn btn-primary lg" onclick="if(typeof window.switchBattleStage==='function'){window.switchBattleStage('stage-second');}else if(typeof window.activateTab==='function'){window.activateTab('battle');}" style="padding: 10px 24px; font-size: 14.5px; box-shadow: 0 8px 20px -6px rgba(232, 67, 138, 0.45);">ดูรายละเอียด →</button>
+          </div>
+        </div>
+
+        <!-- ฝั่งรูปภาพประกอบ (รูปขนาดใหญ่สะใจ คมชัด สัดส่วน 16:9) -->
+        <div class="hero-thumb" style="flex: 1 1 380px; min-width: 300px; max-width: 480px; border-radius: 20px; overflow: hidden; box-shadow: 0 16px 36px -12px rgba(14, 111, 168, 0.25), 0 8px 20px -8px rgba(232, 67, 138, 0.2); border: 2px solid #FFFFFF; z-index: 1;">
+          <img src="https://scontent.fbkk22-5.fna.fbcdn.net/v/t39.30808-6/828532990_122176224302638424_709164378923610497_n.jpg?stp=dst-jpg_tt6&amp;cstp=mx2048x1152&amp;ctp=s2048x1152&amp;_nc_cat=105&amp;_nc_map=urlgen_bucketless&amp;ccb=1-7&amp;_nc_sid=127cfc&amp;_nc_ohc=cMiBrVnAv38Q7kNvwGIVA-e&amp;_nc_oc=AdrjYajvlJQvrFLXH3TylHoq91l4msbN35tQY7hPRNr7_D2oL6gMPpFIrddjYQ_bvD4paBbxaShCZQcedGVFn5Cr&amp;_nc_zt=23&amp;_nc_ht=scontent.fbkk22-5.fna&amp;_nc_gid=zrpyYPYp510vLcQJfXAPiw&amp;_nc_ss=7b2a8&amp;oh=00_AQOzvCpvuODu-qnXOWa2H6I8AdjEkgJPB4m-P0t1goz-Zw&amp;oe=6AC495C8" 
+               alt="SECOND STAGE Banner" 
+               loading="lazy" 
+               style="width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 16/9;">
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="recentGrid">
+      <p class="eyebrow">LATEST UPDATES</p>
+      <h2 class="section-title">ข่าวสารล่าสุด</h2>
+      <div class="card-grid" id="newsGrid"></div>
+    </div>
+  </section>
+
+<!-- ===== TITLE SONG ===== -->
+  <section class="tab-panel" id="panel-title-song">
+    <div class="section">
+      <p class="eyebrow">TITLE SONG</p>
+      
+      <!-- หัวข้อเพลงประจำรายการ และปุ่ม Google Doc อยู่บรรทัดเดียวกัน -->
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+        <h2 class="section-title" style="margin-bottom: 0;">เพลงประจำรายการ</h2>
+        
+        <!-- ปุ่ม Google Doc พร้อมไอคอนเอกสาร -->
+        <a href="https://bit.ly/43BKkt9" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13.5px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v6h6v10H6z"/></svg>
+          Google Doc
+        </a>
+      </div>
+
+      <!-- ส่วนกำหนดการ & ลิงก์ส่งงาน และ รายละเอียดรอบ Title Song -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 40px; align-items: stretch;">
+        
+        <!-- คอลัมน์ซ้าย: กำหนดการรอบ TITLE SONG และลิงก์ส่งงาน -->
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 25px 30px; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center;">
+          <h3 style="margin-bottom: 15px; text-align: center; color: var(--text-strong); font-size: 18px;">📅 กำหนดการรอบ TITLE SONG</h3>
+          <ul class="meta-list" style="margin: 0 auto; width: 100%; margin-bottom: 20px;">
+            <li><span>ระยะเวลาการส่งผลงาน</span><b>29 ก.ค. - 21 ส.ค. 2026 (23.59 น.)</b></li>
+            <li><span>ระยะเวลาส่งผลงานชิงเซนเตอร์</span><b>29 ก.ค. - 03 ส.ค. 2026 (23.59 น.)</b></li>
+            <li><span>ระยะเวลาการโหวตเซนเตอร์</span><b style="color:var(--pink-deep);">04 ส.ค. - 06 ส.ค. 2026 (23.59 น.)</b></li>
+          </ul>
+
+          <!-- ลิงก์ส่งงาน -->
+          <div style="display: flex; flex-direction: column; gap: 10px; border-top: 1px dashed var(--border); padding-top: 15px;">
+            <div style="font-size: 13.5px; font-weight: bold; color: var(--text-strong); display: flex; justify-content: space-between; align-items: center;">
+              <span>🔗 ลิงค์ส่งชิงเซนเตอร์รายการ:</span>
+              <span style="color: var(--pink-deep);">ปิดรับผลงาน</span>
+            </div>
+            <div style="font-size: 13.5px; font-weight: bold; color: var(--text-strong); display: flex; justify-content: space-between; align-items: center;">
+              <span>🔗 ลิงค์ส่งผลงาน:</span>
+              <span style="color: var(--pink-deep);">ปิดรับผลงาน</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- คอลัมน์ขวา: รายละเอียดรอบ Title Song และกลุ่มเกรด -->
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 25px; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center;">
+          <h3 style="margin-bottom: 8px; color: var(--text-strong); font-size: 16px;">💡 รายละเอียดรอบ Title Song</h3>
+          <p class="section-desc" style="margin-bottom: 15px; font-size: 13.5px; line-height: 1.6;">
+            การแสดงในรอบ Title song เด็กฝึกจะถูกแบ่งออกเป็น 4 กลุ่มตามระดับความสามารถ
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: #FBC6D6; padding: 10px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #173447; font-size: 13.5px;">
+              <span>เกรด A</span><span>จำนวน 5 คน</span>
+            </div>
+            <div style="background: #B2EEFF; padding: 10px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #173447; font-size: 13.5px;">
+              <span>เกรด B</span><span>จำนวน 10 คน</span>
+            </div>
+            <div style="background: #FFDA7F; padding: 10px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #173447; font-size: 13.5px;">
+              <span>เกรด C</span><span>จำนวน 13 คน</span>
+            </div>
+            <div style="background: #AFFBAD; padding: 10px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: #173447; font-size: 13.5px;">
+              <span>เกรด D</span><span>จำนวน 12 คน</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- B-Trainees Skyline -->
+      <h3 style="margin-bottom: 15px; color: #67E0FF;">B-TRAINEES — Skyline</h3>
+      <div class="media-card" style="margin-bottom: 60px; align-items: start;">
+        <div class="media-frame" style="display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); aspect-ratio: auto; padding: 25px 20px; border-radius: var(--radius); align-items: center;">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGDHbQPLxoCnkromxVySTZcCbfB50xYTZWCM5KqG9I_xk1TvtAKqnaqxJh&s=10" alt="Skyline Cover" style="width: 300px; height: 300px; object-fit: cover; display: block; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          
+          <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; background: var(--surface-2); padding: 10px 15px; border-radius: 8px; margin-bottom: 10px;">
+            <span>Guide</span>
+            <audio controls style="flex-grow: 1; height: 36px;"><source src="assets/audio/[Tes Center] Skyline (English Version) Guide.wav" type="audio/mpeg"></audio>
+          </div>
+          <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; background: var(--surface-2); padding: 10px 15px; border-radius: 8px;">
+            <span>Inst</span>
+            <audio controls style="flex-grow: 1; height: 36px;"><source src="assets/audio/[Tes Center] Skyline (English Version) Inst.wav" type="audio/mpeg"></audio>
+          </div>
+        </div>
+        <div class="media-info">
+          <h4 style="color: #67E0FF; font-size: 16px; margin-bottom: 5px;">➥ ท่อนชิงเซนเตอร์สำหรับเด็กฝึกชาย</h4>
+          <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 15px;">เด็กฝึกทุกคนสามารถส่งชิงเซนเตอร์เพลงประจำรายการได้</p>
+          
+          <div style="background: rgba(103, 224, 255, 0.1); border: 1px solid #67E0FF; padding: 15px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; color: var(--text-strong);">
+            [English]<br>
+            Just go beyond, there ain't no time or place that we couldn't go<br>
+            (Come with me)<br>
+            Fate can't stop me from this view<br>
+            (view)<br>
+            See everything and then even more<br><br>
+            I see the world, see the skyline<br>
+            Cause now is my time<br>
+            Got me feeling so right<br>
+            (Oh yoohoo)<br>
+            The world drawn in my mind<br>
+            Will guide me tonight, hold you forever yeah we go on and on<br>
+            Come take my hand<br>
+            My heart’s beating fast, moments will last<br>
+            (Oh yoohoo)<br>
+            Come take my hand<br>
+            Till we touch the sky, let’s sail together yeah we go on and on
+          </div>
+        </div>
+      </div>
+
+      <!-- G-Trainees Summer Dream -->
+      <h3 style="margin-bottom: 15px; color: var(--pink-deep);">G-TRAINEES — Summer Dream</h3>
+      <div class="media-card" style="margin-bottom: 60px; align-items: start;">
+        <div class="media-frame" style="display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); aspect-ratio: auto; padding: 25px 20px; border-radius: var(--radius); align-items: center;">
+          <img src="https://i.scdn.co/image/ab67616d00001e024e0eb5687ff7c167501e766c" alt="Summer Dream Cover" style="width: 300px; height: 300px; object-fit: cover; display: block; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+          
+          <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; background: var(--surface-2); padding: 10px 15px; border-radius: 8px; margin-bottom: 10px;">
+            <span>Guide</span>
+            <audio controls style="flex-grow: 1; height: 36px;"><source src="assets/audio/[Test Center] Summer Dream (English Version) Guide.wav" type="audio/mpeg"></audio>
+          </div>
+          <div style="width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; background: var(--surface-2); padding: 10px 15px; border-radius: 8px;">
+            <span>Inst</span>
+            <audio controls style="flex-grow: 1; height: 36px;"><source src="assets/audio/[Test Center] Summer Dream (English Version) Inst.wav" type="audio/mpeg"></audio>
+          </div>
+        </div>
+        <div class="media-info">
+          <h4 style="color: var(--pink-deep); font-size: 16px; margin-bottom: 5px;">➥ ท่อนชิงเซนเตอร์สำหรับเด็กฝึกหญิง</h4>
+          <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 15px;">เด็กฝึกทุกคนสามารถส่งชิงเซนเตอร์เพลงประจำรายการได้</p>
+          
+          <div style="background: #ffebf0; border: 1px solid var(--pink-deep); padding: 15px; border-radius: 8px; font-size: 13.5px; line-height: 1.6; color: var(--text-strong);">
+            [English]<br>
+            This is the start of our trip<br>
+            Get ready, the journey begins<br>
+            We're gonna make the sweetest pie<br><br>
+            It's time to go<br>
+            (Go)<br>
+            You're what I what I waited for<br>
+            (Waited for)<br>
+            And I wanna wanna let you know<br>
+            You will always be my summer dream<br>
+            (summer dream)<br>
+            This is our show<br>
+            (Show)<br>
+            We're gonna, gonna sing along<br>
+            (Sing along)<br>
+            For you, I'll be your star<br>
+            (Star)<br>
+            Forever, you are my summer dream<br>
+            (summer dream)<br>
+            (Hey!)
+          </div>
+        </div>
+      </div>
+
+      <!-- ส่วนรายละเอียดและกฎระเบียบการส่งผลงาน (ตารางคะแนนพิเศษและกฎการส่งไฟล์) -->
+      <div style="display: grid; grid-template-columns: 1fr; gap: 25px; margin-bottom: 40px;">
+        
+        <!-- กล่องที่ 1: ตารางรายละเอียดเกี่ยวกับผลงานและคะแนนพิเศษ -->
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 30px; border-radius: var(--radius);">
+          <h3 style="margin-bottom: 15px; color: var(--text-strong); font-size: 18px;">🎤 รายละเอียดเกี่ยวกับผลงานและคะแนนพิเศษ</h3>
+          
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left;">
+              <thead>
+                <tr style="background: var(--surface-2); border-bottom: 2px solid var(--border);">
+                  <th style="padding: 12px; color: var(--text-strong); width: 25%;">ประเภทผลงาน</th>
+                  <th style="padding: 12px; color: var(--text-strong); width: 45%;">เงื่อนไขและรายละเอียด</th>
+                  <th style="padding: 12px; color: var(--text-strong); width: 30%;">คะแนน / สิทธิประโยชน์</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 12px; font-weight: bold; color: var(--text-strong);">เสียงร้องหลัก (Voice)</td>
+                  <td style="padding: 12px; color: var(--text-soft);">เน้นส่งเสียงร้องเพลงรายการเป็นหลักเพื่อคิดคะแนนสะสมรอบนี้</td>
+                  <td style="padding: 12px; color: var(--pink-deep); font-weight: bold;">+1,799 คะแนนโบนัส (ส่งตรงเวลา)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 12px; font-weight: bold; color: var(--text-strong);">รูปภาพ (Illust)</td>
+                  <td style="padding: 12px; color: var(--text-soft);">รูปเด็กฝึกแสดง (&gt;1920x1080 px, อนุญาตภาพ Commission ได้ 1 รูป)</td>
+                  <td style="padding: 12px; color: var(--pink-deep); font-weight: bold;">+1,000 คะแนนโบนัส (ส่งตรงเวลา)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; font-weight: bold; color: var(--text-strong);">เงื่อนไข PV รายการ</td>
+                  <td style="padding: 12px; color: var(--text-soft);" colspan="2">รูปเด็กฝึกทุกคนจะได้ปรากฏใน PV เพลงรายการแม้ไม่ได้ส่งเสียงร้องเข้ามา (แต่จะไม่แสดงชื่อในเครดิต)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- กล่องที่ 2: ข้อบังคับและกฎการ Edit ไฟล์เสียงชิง Center -->
+        <div style="background: var(--surface); border: 1px solid var(--border); padding: 30px; border-radius: var(--radius);">
+          <h3 style="margin-bottom: 15px; color: var(--text-strong); font-size: 18px;">⭐ ข้อบังคับในการส่งผลงานชิงตำแหน่ง Center</h3>
+          <p style="font-size: 14px; color: var(--text-soft); margin-bottom: 15px; line-height: 1.6;">
+            สำหรับผู้ที่ต้องการชิงตำแหน่งเซนเตอร์ ให้ใช้ไฟล์ไกด์ที่แนบไว้ เรนเดอร์มาพร้อมดนตรี และปฏิบัติตามกฎการ Edit เสียงอย่างเคร่งครัด:
+          </p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 20px;">
+            <div style="background: var(--surface-2); padding: 15px; border-radius: 8px;">
+              <h4 style="font-size: 14px; color: var(--pink-deep); margin-bottom: 8px;">✅ สิ่งที่อนุญาต</h4>
+              <ul style="font-size: 13.5px; color: var(--text-strong); display: flex; flex-direction: column; gap: 6px;">
+                <li>• อนุญาตให้ Time, EQ และตัด Noise เท่านั้น</li>
+                <li>• อัดเฉพาะเสียงร้องไลน์หลัก (ไม่ต้องมี Harmony)</li>
+                <li>• ไฟล์เสียงเดี่ยวต้องเป็น <b>Mono Track (.wav)</b></li>
+              </ul>
+            </div>
+            
+            <div style="background: var(--surface-2); padding: 15px; border-radius: 8px;">
+              <h4 style="font-size: 14px; color: #d9534f; margin-bottom: 8px;">❌ สิ่งที่ไม่อนุญาต</h4>
+              <ul style="font-size: 13.5px; color: var(--text-strong); display: flex; flex-direction: column; gap: 6px;">
+                <li>• ไม่อนุญาตให้มีการ Tune หรือ Reverb ใดๆ ทั้งสิ้น</li>
+                <li>• ไม่อนุญาตให้มีการแพนเสียงซ้าย-ขวา</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- ข้อควรระวัง -->
+          <div style="background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 8px; font-size: 13.5px; line-height: 1.6;">
+            <b>⚠️ ข้อควรระวัง:</b> เนื่องจากต้องเรนเดอร์เสียงมาพร้อมดนตรี ขอให้ระมัดระวังเรื่องการปรับระดับเสียงให้ดี เนื่องจากทีมงานจะไม่ทำการแก้ไขใดๆ กับไฟล์เสียงชิงเซนเตอร์ที่ส่งมา
+          </div>
+        </div>
+
+        <!-- กล่องที่ 3: รูปแบบการตั้งชื่อไฟล์และการส่งงาน (เน้นย้ำจุดหักคะแนนชัดเจน) -->
+        <div style="background: var(--surface); border: 2px solid #ff4757; padding: 30px; border-radius: var(--radius); position: relative; overflow: hidden; box-shadow: 0 4px 20px rgba(255, 71, 87, 0.15);">
+          
+          <!-- ป้ายแถบเน้นย้ำพิเศษด้านบน -->
+          <div style="background: linear-gradient(90deg, #ff4757, #ff6b81); color: white; padding: 12px 15px; font-size: 14px; font-weight: bold; border-radius: 6px; margin-bottom: 20px; text-align: center; box-shadow: 0 3px 10px rgba(255, 71, 87, 0.3);">
+            🚨 หมายเหตุสำคัญ: หากไฟล์ไม่เรียบร้อย จะถูกหัก 500 คะแนนพิเศษจากคะแนนที่ควรได้รับทันที!
+          </div>
+
+          <h3 style="margin-bottom: 15px; color: var(--text-strong); font-size: 18px;">📁 รูปแบบการตั้งชื่อไฟล์และการส่งงานผ่าน Google Drive</h3>
+          
+          <p style="font-size: 14px; color: var(--text-soft); margin-bottom: 15px; line-height: 1.6;">
+            หากส่งผลงานหลายประเภท <b>รบกวนรวมทุกไฟล์มาเป็นโฟลเดอร์เดียว</b> และตั้งชื่อตามรูปแบบด้านล่างนี้:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; font-size: 13.5px;">
+            <div style="background: var(--surface-2); padding: 12px 15px; border-radius: 8px;">
+              <b style="color: var(--text-strong); display: block; margin-bottom: 4px;">🎵 ไฟล์เสียงชิงเซนเตอร์</b>
+              <code style="color: var(--pink-deep);">[รหัสประจำตัว] TestCenter-StageName</code><br>
+              <span style="color: var(--text-soft); font-size: 12px;">Ex. [B88] TestCenter-Tian (.wav / .mp3)</span>
+            </div>
+            
+            <div style="background: var(--surface-2); padding: 12px 15px; border-radius: 8px;">
+              <b style="color: var(--text-strong); display: block; margin-bottom: 4px;">🎤 ไฟล์เสียงร้องทั่วไป</b>
+              <code style="color: var(--pink-deep);">เกรดของเด็กฝึก-สเตจเนม</code><br>
+              <span style="color: var(--text-soft); font-size: 12px;">Ex. A-IRA.wav</span>
+            </div>
+
+            <div style="background: var(--surface-2); padding: 12px 15px; border-radius: 8px;">
+              <b style="color: var(--text-strong); display: block; margin-bottom: 4px;">🖼️ ไฟล์รูปภาพ (Illust)</b>
+              <code style="color: var(--pink-deep);">เกรดของเด็กฝึก-สเตจเนม</code><br>
+              <span style="color: var(--text-soft); font-size: 12px;">Ex. B-Jeschire.png (&gt;1920x1080)</span>
+            </div>
+
+            <div style="background: var(--surface-2); padding: 12px 15px; border-radius: 8px;">
+              <b style="color: var(--text-strong); display: block; margin-bottom: 4px;">📂 ชื่อโฟลเดอร์รวม (Google Drive)</b>
+              <code style="color: var(--pink-deep);">เกรดของเด็กฝึก-สเตจเนม</code><br>
+              <span style="color: var(--text-soft); font-size: 12px;">Ex. C-KAZE</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== BATTLE (ALL STAGES) ===== -->
+  <section class="tab-panel" id="panel-battle">
+    <div class="section battle-section">
+      <p class="eyebrow">STAGES & MISSIONS</p>
+      <h2 class="section-title">STAGE BATTLE</h2>
+      <p class="section-desc">การแข่งขันประชันความสามารถของเหล่าเด็กฝึกในแต่ละรอบตลอดทั้งรายการ</p>
+
+      <!-- 1. FIRST STAGE -->
+      <div class="stage-content-block active" id="stage-first">
+        <div class="stage-header-box" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1; min-width: 260px;">
+            <span class="stage-tag">STAGE 01</span>
+            <h3 style="margin-top: 6px;">【FIRST STAGE】TEAM BATTLE</h3>
+            <p style="font-size: 14.5px; line-height: 1.7; color: var(--text-soft); margin-top: 8px;">
+              เด็กฝึกทั้ง 80 คน จะถูกแบ่งกลุ่มออกเป็นทั้งหมด 20 ทีม ฝั่งละ 10 ทีม (แยกชาย-หญิง) เพื่อประชันความสามารถในโจทย์เพลงต่าง ๆ
+            </p>
+          </div>
+          <!-- ปุ่ม Google Doc สำหรับ FIRST STAGE -->
+          <a href="https://docs.google.com/document/d/1fbAlY0tzpVkFYl7t1uHhCbBLekOIgAocn15Sg6jgPXY/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13.5px; align-self: flex-start; white-space: nowrap;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v6h6v10H6z"/></svg>
+            Google Doc
+          </a>
+        </div>
+
+
+        <div id="firstStageContainer"></div>
+      </div>
+
+      <!-- 2. SECOND STAGE -->
+      <div class="stage-content-block" id="stage-second">
+        <div class="stage-header-box" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+          <div style="flex: 1; min-width: 260px;">
+            <span class="stage-tag">STAGE 02</span>
+            <h3 style="margin-top: 6px;">【SECOND STAGE】POSITION EVALUATION</h3>
+            <p style="font-size: 14.5px; line-height: 1.7; color: var(--text-soft); margin-top: 8px;">
+              เด็กฝึกทั้งหมดจะต้องเลือกประชันกันในเพลงที่ท้าทายความสามารถทั้งในด้าน Vocal, Rap และ Dance โดยเด็กฝึกจะถูกแบ่งออกเป็นทั้งหมด 24 ทีม (แยกชาย-หญิง) โดยจำนวนเด็กฝึกในแต่ละทีมจะมีจำนวนที่ไม่เท่ากัน
+            </p>
+          </div>
+          <!-- ปุ่ม Google Doc สำหรับ SECOND STAGE -->
+          <a href="https://docs.google.com/document/d/1r8RYinzC7F6PuxFD9RWL3qooUBErj2Q7LREBpdTqWxo/edit?tab=t.0" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 13.5px; align-self: flex-start; white-space: nowrap;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v6h6v10H6z"/></svg>
+            Google Doc
+          </a>
+        </div>
+
+        <div id="secondStageContainer"></div>
+      </div>
+
+      <!-- 3. THIRD STAGE -->
+      <div class="stage-content-block" id="stage-third">
+        <div class="stage-header-box">
+          <span class="stage-tag">STAGE 03</span>
+          <h3>【THIRD STAGE】COLLABORATION ALLSTARS</h3>
+          <p style="font-size: 14.5px; line-height: 1.7; color: var(--text-soft); margin-top: 8px;">
+            เด็กฝึกทั้งหมดจะต้องเลือกทำการแสดงร่วมกับเหล่า Producer โดยใน 1 ทีม จะมี Producer ร่วมทำการแสดงด้วย 1 คน รวมทั้งหมด 16 ทีม ฝั่งละ 8 ทีม (แยกชาย-หญิง) ที่จะได้ท้าทายโจทย์เพลงที่มีสไตล์แตกต่างกัน
+          </p>
+        </div>
+      </div>
+
+      <!-- 4. DEBUT NIGHT STAGE -->
+      <div class="stage-content-block" id="stage-final">
+        <div class="stage-header-box final-stage">
+          <span class="stage-tag final">FINAL</span>
+          <h3>【DEBUT NIGHT STAGE】GRAND FINAL</h3>
+          <p style="font-size: 14.5px; line-height: 1.7; color: var(--text-soft); margin-top: 8px;">
+            เด็กฝึกทั้งหมดจะถูกแบ่งออกเป็น 10 ทีม ฝั่งละ 5 ทีม (แยกชาย-หญิง) เพื่อเฟ้นหาผู้ชนะเพียง 5 คนสุดท้ายของแต่ละฝั่งที่จะได้รับโอกาสให้เป็นศิลปินเต็มตัวอย่างเป็นทางการ
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== TRAINEES ===== -->
+  <section class="tab-panel" id="panel-trainees">
+    <div class="section">
+      <p class="eyebrow">MEET THE TRAINEES</p>
+      <h2 class="section-title">TRAINEES</h2>
+      <div class="trainee-block">
+        <div class="trainee-block-head"><h3>B-TRAINEES</h3><span class="count-pill" id="bCount"></span></div>
+        <div class="trainee-grid" id="bTraineeGrid"></div>
+      </div>
+      <div class="trainee-block">
+        <div class="trainee-block-head"><h3>G-TRAINEES</h3><span class="count-pill" id="gCount"></span></div>
+        <div class="trainee-grid" id="gTraineeGrid"></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== RANKING ===== -->
+  <section class="tab-panel" id="panel-ranking">
+    <div class="section ranking-section">
+      <div class="ranking-header-bar">
+        <div><p class="eyebrow">OFFICIAL RANKING</p><h2 class="section-title">TRAINEES RANKING</h2></div>
+        <div class="ranking-controls">
+          <div class="teamside-toggle" style="margin-bottom:0;">
+            <button class="side-btn active" id="rankSideB" data-side="B">B-TRAINEES</button>
+            <button class="side-btn" id="rankSideG" data-side="G">G-TRAINEES</button>
+          </div>
+          <div class="round-select-wrapper">
+            <select id="rankingRoundSelect" class="round-select">
+              <option value="rankFirst" selected>【FIRST STAGE】Team Battle</option>
+              <option value="rankSecond" disabled>【SECOND STAGE】Position Evaluation</option>
+              <option value="rankThird" disabled>【THIRD STAGE】Collaboration Allstars</option>
+              <option value="rankFinal" disabled>【DEBUT NIGHT STAGE】Grand Final</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="ranking-content-box">
+        <div class="rank-podium-block"><div class="rank-banner-tag">TOP 5</div><div id="rankPyramid" class="rank-pyramid"></div></div>
+        <div class="rank-sub-block"><div class="rank-banner-tag rank-secondary">RANK 6 - 10</div><div id="rankTier2" class="rank-row-five"></div></div>
+        <div class="rank-sub-block"><div class="rank-banner-tag rank-muted">RANK 11 - 40</div><div id="rankTier3" class="rank-grid-small"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAST ===== -->
+  <section class="tab-panel" id="panel-cast">
+    <div class="section">
+      <p class="eyebrow">MENTORS & STAFF</p>
+      <h2 class="section-title">CAST</h2>
+      <div class="cast-grid" id="castGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAM ===== -->
+  <section class="tab-panel" id="panel-program">
+    <div class="section">
+      <p class="eyebrow">SCHEDULE</p>
+      <h2 class="section-title">PROGRAM</h2>
+      <div class="calendar-head">
+        <button class="cal-nav" id="calPrev">‹</button>
+        <h3 id="calLabel">—</h3>
+        <button class="cal-nav" id="calNext">›</button>
+      </div>
+      <div class="calendar-weekdays" id="calWeekdays"></div>
+      <div class="calendar-grid" id="calGrid"></div>
+      <div class="event-legend" id="eventLegend"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>© IDOL CAMP ASIA COMMU</p>
+</footer>
+
+<!-- Modals -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="centerAdsBackdrop" style="display:none; z-index: 1000;">
+  <div class="center-ads-modal">
+    <button class="modal-close" onclick="closeCenterAds()">✕</button>
+    <div class="ads-badge">OFFICIAL ANNOUNCEMENT</div>
+    <h2 class="ads-title">🎉 ขอแสดงความยินดีอย่างเป็นทางการ</h2>
+    <p class="ads-subtitle">สำหรับการได้รับเลือกเป็น <b>CENTER</b> เพลงประจำรายการ</p>
+  </div>
+</div>
+
+<!-- Scripts (โหลดไฟล์ย่อยครบทุกระบบตามโครงสร้าง Modular) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="data.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/battle.js"></script>
+<script src="js/trainees.js"></script>
+<script src="js/ranking.js"></script>
+<script src="js/cast.js"></script>
+<script src="js/calendar.js"></script>
+
+<!-- Scripts (Loop PLaylist) -->
+<script>
+(function() {
+  const PLAYLIST_R1_CSV = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSgJm-hdAxCRJmSqni3wlRQmZl4f74DiNMqr6c_O3a5mR913CYCpaiF_NQbWKOpAx6nNjxhC7EoIbwz/pub?gid=965630160&single=true&output=csv&t=${Date.now()}`;
+  const wrap = document.getElementById("playlistLoopWrap");
+  const track = document.getElementById("playlistLoopTrack");
+
+  if (!track || !wrap) return;
+
+  let animId = null;
+  let posX = 0;
+  let isHovered = false;
+  let isDragging = false;
+  let hasDragged = false;
+  let startX = 0;
+  let startPosX = 0;
+  const speed = 0.6; // ความเร็วการวิ่งลูปช้าๆ
+
+  function createCard(item) {
+    const side = (item.side || "b").toLowerCase().trim();
+    const isB = side === "b";
+    const badgeBg = isB ? "#0E6FA8" : "#E8438A";
+    const sideText = isB ? "B-TRAINEES" : "G-TRAINEES";
+
+    const a = document.createElement("a");
+    a.href = (item.link || "").trim() || "#";
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.style.cssText = `
+      flex: 0 0 300px;
+      width: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: block;
+      box-shadow: 0 8px 24px -8px rgba(23, 52, 71, 0.25);
+      border: 1px solid var(--border);
+      background: #000;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    `;
+    a.onmouseenter = () => {
+      if (!isDragging) {
+        a.style.transform = "translateY(-4px) scale(1.02)";
+        a.style.boxShadow = `0 16px 30px -8px ${isB ? 'rgba(14, 111, 168, 0.45)' : 'rgba(232, 67, 138, 0.45)'}`;
+      }
+    };
+    a.onmouseleave = () => {
+      a.style.transform = "translateY(0) scale(1)";
+      a.style.boxShadow = "0 8px 24px -8px rgba(23, 52, 71, 0.25)";
+    };
+
+    // ป้องกันการเผลอเปิดลิงก์ตอนกำลังลากนิ้วเลื่อน
+    a.addEventListener("click", (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    a.innerHTML = `
+      <div style="position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; pointer-events: none;">
+        <img src="${(item.pic || '').trim()}" alt="${(item.name || '').trim()}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none;">
+        <div style="position: absolute; top: 10px; left: 10px; background: ${badgeBg}; color: #fff; font-family: var(--font-display); font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+          ${sideText}
+        </div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85) 100%); display: flex; align-items: flex-end; padding: 12px;">
+          <div style="color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;">
+            ${(item.name || '').trim()}
+          </div>
+        </div>
+      </div>
+    `;
+    return a;
+  }
+
+  function startSmoothLoop(validList) {
+    track.innerHTML = "";
+    
+    // เรียงตามแถวใน Google Sheets 1:1
+    validList.forEach(item => track.appendChild(createCard(item)));
+    // โคลนอีก 1 ชุดเพื่อทำ Seamless Infinite Loop
+    validList.forEach(item => track.appendChild(createCard(item)));
+
+    function getHalfWidth() {
+      return track.scrollWidth / 2 || 1;
+    }
+
+    wrap.addEventListener("mouseenter", () => { isHovered = true; });
+    wrap.addEventListener("mouseleave", () => { 
+      if (!isDragging) isHovered = false; 
+    });
+
+    // Event รองรับทั้งเมาส์บนคอมพิวเตอร์และทัชสกรีนบนมือถือ
+    function onPointerDown(e) {
+      isDragging = true;
+      hasDragged = false;
+      startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      startPosX = posX;
+      wrap.style.cursor = "grabbing";
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      const diffX = currentX - startX;
+
+      if (Math.abs(diffX) > 6) {
+        hasDragged = true;
+      }
+
+      posX = startPosX - diffX;
+      const halfWidth = getHalfWidth();
+      while (posX < 0) posX += halfWidth;
+      while (posX >= halfWidth) posX -= halfWidth;
+
+      track.style.transform = `translateX(-${posX}px)`;
+    }
+
+    function onPointerUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      wrap.style.cursor = "grab";
+      setTimeout(() => { hasDragged = false; }, 80);
+    }
+
+    wrap.addEventListener("mousedown", onPointerDown);
+    window.addEventListener("mousemove", onPointerMove);
+    window.addEventListener("mouseup", onPointerUp);
+
+    wrap.addEventListener("touchstart", onPointerDown, { passive: true });
+    window.addEventListener("touchmove", onPointerMove, { passive: true });
+    window.addEventListener("touchend", onPointerUp);
+    window.addEventListener("touchcancel", onPointerUp);
+
+    function tick() {
+      if (!isHovered && !isDragging) {
+        posX += speed;
+        const halfWidth = getHalfWidth();
+        if (posX >= halfWidth) {
+          posX = 0;
+        }
+        track.style.transform = `translateX(-${posX}px)`;
+      }
+      animId = requestAnimationFrame(tick);
+    }
+
+    if (animId) cancelAnimationFrame(animId);
+    tick();
+  }
+
+  if (typeof Papa !== "undefined") {
+    Papa.parse(PLAYLIST_R1_CSV, {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(res) {
+        const validList = (res.data || []).filter(r => r.pic && r.pic.trim() !== "");
+        if (validList.length > 0) {
+          startSmoothLoop(validList);
+        }
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -73,7 +73,7 @@
           <div class="ads-center-card side-b">
             <div class="ads-avatar-wrap">
               <div class="ads-tag-pill b-tag">B-CENTER</div>
-              <img class="ads-avatar-img" src="https://lh3.googleusercontent.com/d/1Tly8g24k9ng6ZpVI6ofieM3-TNRROykz" alt="Sa Haerang">
+              <img class="ads-avatar-img" src="https://lh3.googleusercontent.com/d/1UcGGQhq1Enxv4vuEWQ-vNVU_tcjTCfdQ" alt="Sa Haerang">
             </div>
             <div class="ads-name">Sa Haerang</div>
             <div class="ads-stage">zoren</div>

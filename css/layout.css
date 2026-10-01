@@ -1,0 +1,192 @@
+/* ============ TOPBAR & HEADER ============ */
+.site-header {
+  background-image: url('assets/Header.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.contact-row {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 15px 25px 0;
+}
+.social-cluster {
+  display: flex;
+  gap: 20px;
+}
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent !important;
+  border: none !important;
+}
+.social-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.social-icon:hover svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+.logo-row {
+  display: flex;
+  justify-content: center;
+  padding: 4px 20px 18px;
+}
+.logo-wrap { cursor: pointer; user-select: none; }
+.logo-img {
+  width: 454.8px;
+  height: 255.83px;
+  max-width: 70vw;
+  object-fit: contain;
+  margin: 0 auto;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.logo-img:hover {
+  filter: drop-shadow(0px 0px 18px rgb(255, 255, 255));
+  transform: scale(1.02);
+}
+
+/* ============ TAB NAVIGATION ============ */
+.tabnav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 100;
+  overflow: visible !important;
+}
+.tabnav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  position: relative;
+  overflow: visible !important;
+}
+.tab-btn {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 3px solid transparent !important;
+  padding: 16px 18px 13px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13.5px;
+  letter-spacing: 1.2px;
+  color: var(--text-soft);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+.tab-btn:hover { color: var(--pink); }
+.tab-btn.active {
+  color: var(--blue-deep) !important;
+  border-image: linear-gradient(90deg, var(--grad-a), var(--grad-b)) 1 !important;
+  border-bottom-width: 3px !important;
+  border-bottom-style: solid !important;
+}
+
+/* Dropdown Menu */
+.tab-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.arrow-icon {
+  font-size: 9px;
+  transition: transform 0.2s ease;
+}
+.tab-dropdown.show .arrow-icon,
+.tab-dropdown:hover .arrow-icon {
+  transform: rotate(180deg);
+}
+.tab-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 14px 35px rgba(23, 52, 71, 0.18);
+  min-width: 230px;
+  padding: 8px;
+  z-index: 9999;
+  flex-direction: column;
+  gap: 4px;
+}
+.tab-dropdown.show .tab-dropdown-menu,
+.tab-dropdown:hover .tab-dropdown-menu {
+  display: flex !important;
+}
+.tab-sub-item {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-strong);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: 100%;
+}
+.tab-sub-item:hover { background: var(--surface-2); color: var(--pink-deep); }
+.tab-sub-item.active {
+  background: linear-gradient(95deg, rgba(103, 224, 255, 0.2), rgba(255, 189, 217, 0.2));
+  color: var(--blue-deep);
+}
+
+/* ============ PAGE PANELS & SECTIONS ============ */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 56px 20px;
+}
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--pink);
+  margin: 0 0 8px;
+}
+.section-title {
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.section-desc {
+  color: var(--text-soft);
+  font-size: 15px;
+  max-width: 720px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+.site-footer {
+  text-align: center;
+  padding: 28px;
+  color: var(--text-soft);
+  font-size: 12.5px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}

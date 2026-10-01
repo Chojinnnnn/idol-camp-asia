@@ -1,0 +1,48 @@
+/* ============ TOKENS & RESET ============ */
+:root {
+  --grad-a: #67E0FF;
+  --grad-b: #FFBDD9;
+  --blue: #1C93D6;
+  --blue-deep: #0E6FA8;
+  --pink: #FF5FA0;
+  --pink-deep: #E8438A;
+  --bg: #fcfcfc;
+  --surface: #ffffff;
+  --surface-2: #EAF6FB;
+  --border: #DCEEF5;
+  --text: #1C93D6;
+  --text-strong: #173447;
+  --text-soft: #5F8CA3;
+  --white: #FFFFFF;
+  --shadow: 0 12px 28px -14px rgba(28, 147, 214, 0.28);
+  --radius: 16px;
+  --font-display: 'Kanit', 'Noto Sans Thai', sans-serif;
+  --font-body: 'Noto Sans Thai', 'Kanit', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: background 0.35s ease, color 0.35s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  margin: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}

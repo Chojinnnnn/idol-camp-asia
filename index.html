@@ -609,6 +609,72 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<!-- ระบบจำแท็บหลักและ Sub-tab ล่าสุดเมื่อรีเฟรชหน้าเว็บ -->
+<script>
+(function() {
+  // บันทึกสถานะทุกครั้งที่มีการเปลี่ยนแท็บ
+  function bindTabMemory() {
+    // 1. จำแท็บหลัก (HOME, BATTLE, TRAINEES, ฯลฯ)
+    document.querySelectorAll(".tab-btn[data-tab]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tabId = btn.dataset.tab;
+        if (tabId) {
+          localStorage.setItem("idc_active_tab", tabId);
+        }
+      });
+    });
+
+    // 2. จำ Sub-tab ของ Battle (FIRST STAGE, SECOND STAGE, ฯลฯ)
+    document.querySelectorAll(".tab-sub-item[data-stage]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const stageId = btn.dataset.stage;
+        if (stageId) {
+          localStorage.setItem("idc_active_tab", "battle");
+          localStorage.setItem("idc_active_stage", stageId);
+        }
+      });
+    });
+  }
+
+  // เรียกคืนค่าเมื่อเปิดหรือรีเฟรชหน้าเว็บ
+  function restoreLastTab() {
+    const savedTab = localStorage.getItem("idc_active_tab");
+    const savedStage = localStorage.getItem("idc_active_stage");
+
+    if (savedTab && savedTab !== "home") {
+      if (typeof window.activateTab === "function") {
+        window.activateTab(savedTab);
+      } else {
+        const targetBtn = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+        if (targetBtn) targetBtn.click();
+      }
+
+      // ถ้าเป็นแท็บ Battle ให้เปิด Sub-stage เดิมทันที
+      if (savedTab === "battle" && savedStage) {
+        setTimeout(() => {
+          if (typeof window.switchBattleStage === "function") {
+            window.switchBattleStage(savedStage);
+          } else {
+            const subBtn = document.querySelector(`.tab-sub-item[data-stage="${savedStage}"]`);
+            if (subBtn) subBtn.click();
+          }
+        }, 100);
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      bindTabMemory();
+      restoreLastTab();
+    });
+  } else {
+    bindTabMemory();
+    restoreLastTab();
+  }
+})();
+</script>
+
 <!-- Scripts (Loop PLaylist - แก้จอ Refresh Rate สูง + ปล่อยเมาส์สมูท) -->
 <script>
 (function() {

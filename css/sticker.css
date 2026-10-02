@@ -1,0 +1,498 @@
+/* =====================================================================
+   MY PICK 5 - 3-COLUMN STICKER STUDIO (B-SIDE | BOARD | G-SIDE)
+   ===================================================================== */
+
+.sticker-studio-wrap {
+  max-width: 1300px;
+  margin: 20px auto 45px auto;
+  padding: 0 12px;
+}
+
+.sticker-studio-box {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F5FAFE 50%, #FFF5F9 100%);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 28px;
+  padding: 26px 24px;
+  box-shadow: 0 20px 45px -15px rgba(14, 111, 168, 0.12),
+              0 12px 30px -10px rgba(232, 67, 138, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.sticker-studio-box::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #67E0FF, #0E6FA8 40%, #E8438A 75%, #FFBDD9);
+}
+
+.sticker-studio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1.5px dashed rgba(82, 107, 125, 0.18);
+}
+
+/* 3-COLUMN LAYOUT */
+.sticker-studio-grid {
+  display: grid;
+  grid-template-columns: 290px 1fr 290px;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .sticker-studio-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* SIDE POOL PANELS (LEFT: B, RIGHT: G) */
+.trainee-pool-panel {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border, #E2EDF3);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 24px -10px rgba(23, 52, 71, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.trainee-pool-panel.side-b {
+  border-top: 4px solid #0E6FA8;
+}
+
+.trainee-pool-panel.side-g {
+  border-top: 4px solid #E8438A;
+}
+
+.pool-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #EEF3F7;
+}
+
+.pool-title {
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pool-title.b-color { color: #0E6FA8; }
+.pool-title.g-color { color: #E8438A; }
+
+.pool-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+.pool-badge.b-color { background: #E8F7FD; color: #0E6FA8; }
+.pool-badge.g-color { background: #FFF0F6; color: #E8438A; }
+
+/* TRAINEES LIST (10 ITEMS PER PAGE: 2 COLUMNS X 5 ROWS) */
+.pool-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  min-height: 270px;
+}
+
+.pool-item-card {
+  background: #FAFCFE;
+  border: 1.5px solid #E2EDF3;
+  border-radius: 12px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-drag: element;
+}
+
+.pool-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px -4px rgba(14, 111, 168, 0.18);
+  border-color: #0E6FA8;
+  background: #FFFFFF;
+}
+
+.pool-item-card.side-g:hover {
+  border-color: #E8438A;
+  box-shadow: 0 6px 14px -4px rgba(232, 67, 138, 0.18);
+}
+
+.pool-item-card.dragging {
+  opacity: 0.45;
+  cursor: grabbing;
+}
+
+.pool-item-card.already-placed {
+  opacity: 0.35;
+  filter: grayscale(85%);
+  cursor: not-allowed;
+  border-color: #DDE5EA;
+  background: #F1F5F8;
+}
+
+.pool-thumb {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #E8EDF2;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.pool-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pool-initial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.pool-info {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pool-id {
+  font-size: 10px;
+  font-weight: 800;
+  color: #7A92A3;
+  line-height: 1;
+}
+
+.pool-name {
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-strong, #173447);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+/* PAGINATION CONTROLS (ปุ่มกดเปลี่ยนหน้า) */
+.pool-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #EEF3F7;
+}
+
+.page-btn {
+  background: #FAFCFE;
+  border: 1.5px solid #E2EDF3;
+  color: var(--text-strong, #173447);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #0E6FA8;
+  color: #fff;
+  border-color: #0E6FA8;
+}
+
+.page-btn.g-btn:hover:not(:disabled) {
+  background: #E8438A;
+  color: #fff;
+  border-color: #E8438A;
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #526B7D;
+}
+
+/* CENTER BOARD (กระดานแปะ 5 สล็อตตรงกลาง) */
+.sticker-center-board {
+  background: #FFFFFF;
+  border: 2px solid #E6EFF5;
+  border-radius: 24px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 30px -10px rgba(23, 52, 71, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.board-banner-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.board-tag {
+  display: inline-block;
+  background: linear-gradient(120deg, #0E6FA8, #E8438A);
+  color: #FFFFFF;
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+
+.board-subtext {
+  font-size: 13px;
+  color: #526B7D;
+  margin-top: 4px;
+}
+
+/* 5 POLAROID SLOTS */
+.center-slots-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 12px !important;
+  margin-bottom: 18px !important;
+}
+
+@media (max-width: 768px) {
+  .center-slots-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .center-slots-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* EMPTY SLOT (DROPZONE) */
+.sticker-slot.empty {
+  aspect-ratio: 3 / 4.4;
+  border: 2px dashed rgba(14, 111, 168, 0.28);
+  border-radius: 16px;
+  background: rgba(245, 250, 254, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #526B7D;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.sticker-slot.empty.drag-over {
+  border-color: #E8438A;
+  background: rgba(255, 240, 246, 0.85);
+  transform: scale(1.03);
+}
+
+.sticker-slot.empty .slot-plus {
+  font-size: 20px;
+  color: rgba(14, 111, 168, 0.45);
+  line-height: 1;
+}
+
+.sticker-slot.empty .slot-num {
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: rgba(14, 111, 168, 0.7);
+}
+
+.sticker-slot.empty .slot-tip {
+  font-size: 10px;
+  color: #7A92A3;
+}
+
+/* FILLED POLAROID STICKER */
+.sticker-slot.filled {
+  aspect-ratio: 3 / 4.4;
+  background: #FFFFFF;
+  border: 3.5px solid #FFFFFF;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px -6px rgba(23, 52, 71, 0.22),
+              0 2px 6px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 6px 6px 10px 6px;
+  position: relative;
+  cursor: pointer;
+  animation: stampPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.sticker-slot.filled:nth-child(1) { transform: rotate(-2deg); }
+.sticker-slot.filled:nth-child(2) { transform: rotate(1.5deg); }
+.sticker-slot.filled:nth-child(3) { transform: rotate(-1deg); }
+.sticker-slot.filled:nth-child(4) { transform: rotate(2deg); }
+.sticker-slot.filled:nth-child(5) { transform: rotate(-2deg); }
+
+.sticker-slot.filled:hover {
+  transform: translateY(-6px) scale(1.04) rotate(0deg) !important;
+  box-shadow: 0 18px 30px -8px rgba(232, 67, 138, 0.35);
+  z-index: 10;
+}
+
+.washi-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 15px;
+  background: rgba(255, 235, 140, 0.8);
+  border-left: 2px dashed rgba(210, 165, 45, 0.4);
+  border-right: 2px dashed rgba(210, 165, 45, 0.4);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.btn-remove-sticker {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(23, 52, 71, 0.75);
+  color: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.sticker-slot.filled:hover .btn-remove-sticker {
+  opacity: 1;
+}
+
+.btn-remove-sticker:hover {
+  background: #E8438A;
+}
+
+.sticker-photo {
+  width: 100%;
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #111;
+  position: relative;
+}
+
+.sticker-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.slot-initial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.sticker-info {
+  margin-top: 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sticker-tag {
+  display: inline-block;
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #0E6FA8;
+  background: #E8F7FD;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.sticker-slot.filled.side-g .sticker-tag {
+  color: #E8438A;
+  background: #FFF0F6;
+}
+
+.sticker-name {
+  font-family: var(--font-display, "Kanit", sans-serif);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--text-strong, #173447);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.2;
+}
+
+.board-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px dashed #E2EDF3;
+}
+
+@keyframes stampPop {
+  0% { transform: scale(0.55) rotate(0deg); opacity: 0; }
+  75% { transform: scale(1.08) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(var(--rot, -1deg)); }
+}

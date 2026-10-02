@@ -71,6 +71,7 @@
   window.openProfileModal = function(t) {
     if(!modalBody || !modalBackdrop) return;
     const grad = t.side === "B" ? "linear-gradient(135deg, #67E0FF, #8FE9FF)" : "linear-gradient(135deg, #FFBDD9, #FFD6E7)";
+    const themeColor = t.side === "B" ? "var(--blue-deep, #0E6FA8)" : "var(--pink-deep, #E8438A)";
     const safeName = t.name || "ไม่ระบุชื่อ";
     const safeStage = t.stageName || "";
     const showStage = (safeStage.trim() && safeStage.trim() !== safeName.trim()) 
@@ -88,6 +89,42 @@
       { label: "【FINAL】", rank: parseInt(t.rankFinal) || 0 }
     ];
 
+    // ดึงค่า docLink และ firstPerformanceLink (รองรับตัวพิมพ์เล็ก/ใหญ่)
+    const rawDocLink = (t.docLink || t.doc_link || t.DocLink || t.doc || "").trim();
+    const rawFirstPerfLink = (t.firstPerformanceLink || t.first_performance_link || t.FirstPerformanceLink || t.firstPerformance || "").trim();
+
+    // สร้างปุ่มลิงก์เอกสารและลิงก์สเตจแรก (ดีไซน์มน นุ่ม Modern Soft & Glow)
+    let linksHtml = "";
+    if (rawDocLink || rawFirstPerfLink) {
+      const isB = (t.side === "B");
+      const bgPill = isB 
+        ? "linear-gradient(135deg, rgba(232, 247, 253, 0.9) 0%, rgba(178, 238, 255, 0.45) 100%)"
+        : "linear-gradient(135deg, rgba(255, 240, 246, 0.9) 0%, rgba(255, 214, 231, 0.5) 100%)";
+      const borderPill = isB ? "rgba(14, 111, 168, 0.3)" : "rgba(232, 67, 138, 0.3)";
+      const shadowPill = isB ? "0 6px 18px -4px rgba(14, 111, 168, 0.2)" : "0 6px 18px -4px rgba(232, 67, 138, 0.2)";
+
+      linksHtml = `
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; margin-bottom:20px;">
+          ${rawDocLink ? `
+            <a href="${rawDocLink}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:#FFFFFF; border:1.5px solid rgba(82, 107, 125, 0.18); color:var(--text-strong, #173447); font-size:12.5px; font-weight:700; text-decoration:none; box-shadow:0 4px 12px -3px rgba(0,0,0,0.06); transition:all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);" onmouseover="this.style.borderColor='${themeColor}';this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 18px -4px rgba(0,0,0,0.1)'" onmouseout="this.style.borderColor='rgba(82, 107, 125, 0.18)';this.style.transform='none';this.style.boxShadow='0 4px 12px -3px rgba(0,0,0,0.06)'">
+              <span style="width:24px; height:24px; border-radius:50%; background:rgba(82, 107, 125, 0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v6h6v10H6z"/></svg>
+              </span>
+              Google Doc
+            </a>
+          ` : ""}
+          ${rawFirstPerfLink ? `
+            <a href="${rawFirstPerfLink}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px; padding:8px 18px; border-radius:999px; background:${bgPill}; border:1.5px solid${borderPill}; color:${themeColor}; font-size:12.5px; font-weight:800; text-decoration:none; box-shadow:${shadowPill}; backdrop-filter:blur(6px); transition:all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)';this.style.boxShadow='0 10px 22px -4px ${isB ? 'rgba(14, 111, 168, 0.35)' : 'rgba(232, 67, 138, 0.35)'}'" onmouseout="this.style.transform='none';this.style.boxShadow='${shadowPill}'">
+              <span style="width:24px; height:24px; border-radius:50%; background:${themeColor}; color:#FFFFFF; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 2px 6px ${isB ? 'rgba(14, 111, 168, 0.3)' : 'rgba(232, 67, 138, 0.3)'};">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              รับชมคลิป FIRST STAGE
+            </a>
+          ` : ""}
+        </div>
+      `;
+    }
+
     modalBody.innerHTML = `
       <div class="modal-hero" style="background:${grad}; width:100%; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; color:#fff; font-size:40px; font-weight:bold;">${avatarContent}</div>
       <div class="modal-content" style="padding:24px 26px 30px;">
@@ -96,6 +133,9 @@
         <div style="font-size: 13px; color: #888888; margin-bottom: 12px; font-weight: normal;">
           CV: ${t.cv || "ยังไม่ระบุ CV"}
         </div>
+        
+        ${linksHtml}
+
         <div class="modal-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-bottom:18px;">
           <div style="background:var(--surface); border-radius:10px; padding:10px 12px;"><span>ตำแหน่ง</span><br><b>${t.position || "-"}</b></div>
           <div style="background:var(--surface); border-radius:10px; padding:10px 12px;"><span>วันเกิด</span><br><b>${t.birth || "รอระบุ"}</b></div>

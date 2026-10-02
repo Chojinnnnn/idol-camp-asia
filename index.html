@@ -4,22 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IDOL CAMP ASIA COMMU</title>
-
-<!-- ภาพ Preview  -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="IDOL CAMP ASIA COMMU">
-<meta property="og:description" content="ติดตามผลงานของเหล่าเด็กฝึกได้ที่นี่ IDOL CAMP ASIA" >
-<meta property="og:image" content="https://i.postimg.cc/xdgGLXy2/Untitled-1.jpg">
-<meta property="og:image:secure_url" content="https://i.postimg.cc/xdgGLXy2/Untitled-1.jpg">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-  
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="sticker.css">
+
+<style>
+/* ปุ่มเลื่อนหน้า: อยู่กึ่งกลาง สวยขึ้น */
+.panel-pagination{display:flex!important;align-items:center;justify-content:center;gap:14px;margin-top:14px;padding-top:12px;border-top:1px dashed #E2EDF3;}
+.panel-page-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid #0E6FA8;background:#fff;color:#0E6FA8;font-size:20px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px -4px rgba(14,111,168,.35);transition:all .15s;}
+.panel-page-btn:hover{background:#0E6FA8;color:#fff;transform:translateY(-1px);}
+.panel-page-btn:active{transform:scale(.92);}
+.panel-page-btn.g-color{border-color:#E8438A;color:#E8438A;box-shadow:0 4px 10px -4px rgba(232,67,138,.35);}
+.panel-page-btn.g-color:hover{background:#E8438A;color:#fff;}
+.panel-page-info{min-width:56px;text-align:center;padding:4px 10px;border-radius:999px;background:#F1F6FA;font-size:12px;font-weight:800;color:#526B7D;}
+.board-circle-slot.drag-over .slot-circle-disc{transform:scale(1.1);border-style:solid!important;}
+.board-circle-slot .slot-circle-disc{transition:transform .15s;}
+@media(max-width:560px){#stageFormationWrap{flex-wrap:wrap;}}
+/* ให้กระดานกลางสูงเท่าแผงซ้าย-ขวา แล้วกระจายช่องให้เต็ม */
+.stage-center-board{align-self:stretch!important;display:flex!important;flex-direction:column!important;}
+.stage-center-board .stage-formation-container{flex:1 1 auto;}
+.formation-group{display:flex!important;flex-direction:column;}
+.formation-rows{flex:1 1 auto;justify-content:space-evenly!important;}
+.stage-bottom-bar{margin-top:12px;text-align:center;}
+</style>
 </head>
 <body>
 
@@ -128,6 +138,75 @@
                alt="SECOND STAGE Banner" 
                loading="lazy" 
                style="width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 16/9;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MY PICK STAGE STUDIO (3-COLUMN CONTAINER: B | FORMATION BOARD 2-4-4 | G) ===== -->
+    <div class="sticker-studio-wrap">
+      <div class="sticker-studio-box">
+        <!-- ส่วนหัว -->
+        <div class="sticker-studio-header">
+          <div>
+            <p class="eyebrow" style="color: #E8438A; font-weight: 800; margin-bottom: 4px;">SPECIAL INTAKE</p>
+            <h2 style="font-size: 26px; font-weight: 900; margin: 0; color: var(--text-strong);">✨ Pick'em</h2>
+            <p style="font-size: 13.5px; color: var(--text-soft); margin-top: 4px;">
+              ลากรูปเด็กฝึก (Drag &amp; Drop) จากฝั่งซ้ายหรือฝั่งขวามาแปะลงตำแหน่งบนกระดาน หรือแตะที่รูปเพื่อแปะอัตโนมัติ
+            </p>
+          </div>
+          <button type="button" class="btn btn-ghost" id="stickerStudioResetBtn" style="padding: 7px 16px; font-size: 13px;">รีเซ็ตกระดาน</button>
+        </div>
+
+        <!-- CONTAINER หลัก 3 คอลัมน์ (ล็อกแนวนอนเสมอ: ซ้าย - กลาง - ขวา) -->
+        <div class="sticker-studio-grid" style="display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: stretch !important; gap: 16px !important; width: 100% !important; box-sizing: border-box !important;">
+
+          <!-- 1. คอลัมน์ซ้าย: ฝั่งชาย (B-TRAINEES 10 คน/หน้า วนลูป 1-4) -->
+          <div class="trainee-side-panel side-b" style="flex: 0 0 230px !important; width: 230px !important; min-width: 230px !important; box-sizing: border-box !important;">
+            <!-- รายชื่อวงกลม 10 คน (2 คอลัมน์ x 5 แถว) -->
+            <div class="trainee-circle-grid" id="poolGridB" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 10px 6px !important;"></div>
+            <!-- ปุ่มเปลี่ยนหน้า (วนลูป 1-4) -->
+            <div class="panel-pagination">
+              <button type="button" class="panel-page-btn" id="prevBtnB" title="หน้าก่อนหน้า">‹</button>
+              <span class="panel-page-info" id="pageInfoB">1 / 4</span>
+              <button type="button" class="panel-page-btn" id="nextBtnB" title="หน้าถัดไป">›</button>
+            </div>
+          </div>
+
+          <!-- 2. คอลัมน์กลาง: กระดานแปะสติ๊กเกอร์ (ผังวงกลม 2-4-4 รวม 10 ตำแหน่ง) -->
+          <div class="stage-center-board" style="flex: 1 1 auto !important; min-width: 440px !important; box-sizing: border-box !important;">
+            <div class="stage-board-title-box">
+            </div>
+
+            <!-- ผังวงกลม 3 ชั้นตรงกลาง (2 - 4 - 4) ตามภาพวาด -->
+            <div class="stage-formation-container" id="stageFormationWrap" style="display:flex;flex-direction:row;align-items:stretch;gap:12px;">
+              <div class="formation-group" style="flex:1 1 0;min-width:0;box-sizing:border-box;padding:14px 8px 12px;border-radius:22px;background:linear-gradient(160deg,#F4FBFF,#E3F3FC);border:1.5px solid #0E6FA830;box-shadow:0 10px 24px -12px #0E6FA866;">
+                <div style="text-align:center;margin-bottom:10px;"><span style="display:inline-block;padding:3px 14px;border-radius:999px;background:#0E6FA8;color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.6px;">💙 ฝั่งชาย (B)</span></div>
+                <div class="formation-rows" style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="0"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 01</span></div></div><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="1"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 02</span></div><div class="board-circle-slot empty" data-slot="2"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 03</span></div></div><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="3"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 04</span></div><div class="board-circle-slot empty" data-slot="4"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 05</span></div></div></div>
+              </div>
+              <div style="border-left:2px dashed #CBD9E3;"></div>
+              <div class="formation-group" style="flex:1 1 0;min-width:0;box-sizing:border-box;padding:14px 8px 12px;border-radius:22px;background:linear-gradient(160deg,#FFF8FB,#FFE9F2);border:1.5px solid #E8438A30;box-shadow:0 10px 24px -12px #E8438A66;">
+                <div style="text-align:center;margin-bottom:10px;"><span style="display:inline-block;padding:3px 14px;border-radius:999px;background:#E8438A;color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.6px;">💗 ฝั่งหญิง (G)</span></div>
+                <div class="formation-rows" style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="5"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 01</span></div></div><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="6"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 02</span></div><div class="board-circle-slot empty" data-slot="7"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 03</span></div></div><div style="display:flex;justify-content:center;gap:12px;"><div class="board-circle-slot empty" data-slot="8"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 04</span></div><div class="board-circle-slot empty" data-slot="9"><div class="slot-circle-disc"><span class="plus-icon">＋</span></div><span class="slot-label-text">SLOT 05</span></div></div></div>
+              </div>
+            </div>
+
+            <div class="stage-bottom-bar">
+              <span style="font-size: 11.5px; color: #7A92A3;">💡 แตะหรือลากเด็กฝึกมาวาง (ฝั่งชายลงช่องฟ้า / ฝั่งหญิงลงช่องชมพู) (คลิกที่วงกลมบนกระดานเพื่อแกะออก)</span>
+            </div>
+          </div>
+
+          <!-- 3. คอลัมน์ขวา: ฝั่งหญิง (G-TRAINEES 10 คน/หน้า วนลูป 1-4) -->
+          <div class="trainee-side-panel side-g" style="flex: 0 0 230px !important; width: 230px !important; min-width: 230px !important; box-sizing: border-box !important;">
+            <!-- รายชื่อวงกลม 10 คน (2 คอลัมน์ x 5 แถว) -->
+            <div class="trainee-circle-grid" id="poolGridG" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 10px 6px !important;"></div>
+            <!-- ปุ่มเปลี่ยนหน้า (วนลูป 1-4) -->
+            <div class="panel-pagination">
+              <button type="button" class="panel-page-btn g-color" id="prevBtnG" title="หน้าก่อนหน้า">‹</button>
+              <span class="panel-page-info" id="pageInfoG">1 / 4</span>
+              <button type="button" class="panel-page-btn g-color" id="nextBtnG" title="หน้าถัดไป">›</button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -580,6 +659,7 @@
 <script src="js/ranking.js"></script>
 <script src="js/cast.js"></script>
 <script src="js/calendar.js"></script>
+<script src="js/sticker.js"></script>
 
 <!-- ระบบจำแท็บล่าสุดเมื่อรีเฟรชหน้าเว็บ (Remember Active Tab) -->
 <script>

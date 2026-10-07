@@ -106,6 +106,24 @@
     return ` · <span style="display:inline-block; vertical-align:middle; padding:2px 11px; border-radius:999px; background:${st.soft}; color:${st.dark}; border:1px solid ${st.main}66; font-size:11px; font-weight:800; letter-spacing:.4px; line-height:1.6; box-shadow:0 3px 8px -2px ${st.glow};">Grade ${g}</span>`;
   }
 
+  // การ์ดผลการประเมิน วางใต้ปุ่ม Google Doc / FIRST STAGE พื้นหลังตามสีเกรด
+  function gradeResultCard(grade) {
+    const g = normGrade(grade);
+    if (!g) return "";
+    const s = GRADE_STYLE[g];
+    const txt = g === "C" ? "#5A4200" : "#FFFFFF";
+    const sub = g === "C" ? "rgba(90, 66, 0, 0.75)" : "rgba(255, 255, 255, 0.85)";
+    return `
+      <div class="grade-result" style="position:relative; overflow:hidden; display:flex; align-items:center; gap:16px; margin-top:-6px; margin-bottom:20px; padding:14px 20px; border-radius:16px; background:${s.grad}; color:${txt}; box-shadow:0 10px 24px -8px ${s.glow};">
+        <span style="position:relative; flex-shrink:0; width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,${g === "C" ? "0.55" : "0.25"}); border:2px solid rgba(255,255,255,0.7); display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:800; line-height:1;">${g}</span>
+        <span style="position:relative; display:flex; flex-direction:column; gap:2px;">
+          <span style="font-size:11.5px; font-weight:700; letter-spacing:1.2px; color:${sub};">ผลการประเมิน</span>
+          <span style="font-size:20px; font-weight:800; letter-spacing:.5px; line-height:1.2;">Grade ${g}</span>
+        </span>
+      </div>
+    `;
+  }
+
   window.openProfileModal = function(t) {
     if(!modalBody || !modalBackdrop) return;
     const grad = t.side === "B" ? "linear-gradient(135deg, #67E0FF, #8FE9FF)" : "linear-gradient(135deg, #FFBDD9, #FFD6E7)";
@@ -173,6 +191,7 @@
         </div>
 
         ${linksHtml}
+        ${gradeResultCard(t.grade)}
 
         <div class="modal-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 16px; margin-bottom:18px;">
           <div style="background:var(--surface); border-radius:10px; padding:10px 12px;"><span>ตำแหน่ง</span><br><b>${t.position || "-"}</b></div>
